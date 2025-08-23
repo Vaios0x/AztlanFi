@@ -1,14 +1,20 @@
-// Configuración de contratos desplegados en Monad testnet
+const fs = require('fs');
+
+// Read deployment info
+const deploymentInfo = JSON.parse(fs.readFileSync('deployment-info-monad-final.json', 'utf8'));
+
+// Update contracts.ts file
+const contractsTsContent = `// Configuración de contratos desplegados en Monad testnet
 export const CONTRACT_ADDRESSES = {
   // Monad Testnet (Chain ID: 10143)
   monadTestnet: {
-    RemittancePool: "0x138ad2d0d48070dffD6C6DaeaEbADc483CbeE29a",
-    ComplianceModule: "0x025434d9Cd4c77F7acC24f8DF90F07b425eFA953",
-    IncentiveVault: "0x6fF6aD8216dD1454bC977Ebb72C83aD96C034E28",
-    RemittanceToken: "0x2e2e47ab692b8A29c16a38bca3A8523fA520853b",
-    ExchangeRateOracle: "0xFFdCc99Cc7A9DE930716e3fB4a1b153caa740AfC",
-    AztlanFiCore: "0x0000000000000000000000000000000000000000", // To be deployed
-    PartnerIntegrations: "0x0000000000000000000000000000000000000000", // To be deployed
+    RemittancePool: "${deploymentInfo.contracts.RemittancePool}",
+    ComplianceModule: "${deploymentInfo.contracts.ComplianceModule}",
+    IncentiveVault: "${deploymentInfo.contracts.IncentiveVault}",
+    RemittanceToken: "${deploymentInfo.contracts.RemittanceToken}",
+    ExchangeRateOracle: "${deploymentInfo.contracts.ExchangeRateOracle}",
+    AztlanFiCore: "${deploymentInfo.contracts.AztlanFiCore}",
+    PartnerIntegrations: "${deploymentInfo.contracts.PartnerIntegrations}",
   },
   // Hardhat Local (Chain ID: 1337) - para desarrollo local
   hardhat: {
@@ -36,7 +42,7 @@ export function getContractAddresses(chainId: number) {
     case 1337: // Hardhat Local
       return CONTRACT_ADDRESSES.hardhat;
     default:
-      throw new Error(`Chain ID ${chainId} no soportado`);
+      throw new Error(\`Chain ID \${chainId} no soportado\`);
   }
 }
 
@@ -48,7 +54,7 @@ export function getExplorerUrl(chainId: number) {
     case 1337: // Hardhat Local
       return EXPLORER_URLS.hardhat;
     default:
-      throw new Error(`Chain ID ${chainId} no soportado`);
+      throw new Error(\`Chain ID \${chainId} no soportado\`);
   }
 }
 
@@ -62,3 +68,13 @@ export interface ContractAddresses {
   AztlanFiCore: string;
   PartnerIntegrations: string;
 }
+`;
+
+// Write updated contracts.ts file
+fs.writeFileSync('src/lib/web3/contracts.ts', contractsTsContent);
+
+console.log('✅ Updated src/lib/web3/contracts.ts with new contract addresses');
+console.log('📋 Contract addresses updated:');
+Object.entries(deploymentInfo.contracts).forEach(([name, address]) => {
+  console.log(`  ${name}: ${address}`);
+});

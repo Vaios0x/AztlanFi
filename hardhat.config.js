@@ -6,6 +6,7 @@ module.exports = {
   solidity: {
     version: "0.8.20",
     settings: {
+      viaIR: true,
       optimizer: {
         enabled: true,
         runs: 200,
@@ -16,8 +17,8 @@ module.exports = {
     "monad-testnet": {
       url: "https://testnet-rpc.monad.xyz",
       chainId: 10143,
-      accounts: ["2003f926c578fea4a77ffdd98a288a3297ee12b8893505562422dd258e4a5765"],
-      gasPrice: 60000000000, // 60 gwei (higher than current 52 gwei)
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 60000000000, // 60 gwei
       gas: 5000000,
     },
     hardhat: {
@@ -33,8 +34,8 @@ module.exports = {
         network: "monad-testnet",
         chainId: 10143,
         urls: {
-          apiURL: "https://testnet.monadscan.com/api",
-          browserURL: "https://testnet.monadscan.com",
+          apiURL: "https://testnet.monadexplorer.com/api",
+          browserURL: "https://testnet.monadexplorer.com",
         },
       },
     ],

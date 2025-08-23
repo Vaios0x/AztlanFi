@@ -176,13 +176,13 @@ export function Features() {
     }
   ]
 
-  const FeatureModal = ({ feature }: { feature: any }) => (
+  const FeatureModal = ({ feature, onClose }: { feature: any, onClose: () => void }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-gray-800 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
       >
         <div className="flex justify-between items-start mb-6">
           <div className="flex items-center gap-4">
@@ -190,13 +190,13 @@ export function Features() {
               <feature.icon className="text-white" size={32} />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900">{feature.details.title}</h3>
-              <p className="text-gray-600">{feature.details.description}</p>
+              <h3 className="text-2xl font-bold text-white">{feature.details.title}</h3>
+              <p className="text-gray-300">{feature.details.description}</p>
             </div>
           </div>
           <button
-            onClick={() => setSelectedFeature(null)}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-200 transition-colors"
             aria-label="Close modal"
           >
             <X size={24} />
@@ -205,26 +205,26 @@ export function Features() {
 
         <div className="space-y-6">
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Benefits</h4>
+            <h4 className="text-lg font-semibold text-white mb-3">Key Benefits</h4>
             <ul className="space-y-2">
               {feature.details.benefits.map((benefit: string, index: number) => (
                 <li key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <span className="text-gray-700">{benefit}</span>
+                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">{benefit}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">Technical Details</h4>
-            <p className="text-gray-600 leading-relaxed">{feature.details.technical}</p>
+            <h4 className="text-lg font-semibold text-white mb-3">Technical Details</h4>
+            <p className="text-gray-300 leading-relaxed">{feature.details.technical}</p>
           </div>
 
           <div className="flex gap-3">
             <button
-              onClick={() => setSelectedFeature(null)}
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              onClick={onClose}
+              className="flex-1 px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 transition-colors"
             >
               Close
             </button>
@@ -244,7 +244,7 @@ export function Features() {
   )
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="features" className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -254,10 +254,10 @@ export function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Main Features
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Discover why AztlanFi is the most advanced, fastest and most economical 
             remittance platform on the market
           </p>
@@ -272,7 +272,7 @@ export function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`group p-8 rounded-2xl border-2 ${feature.bgColor} ${feature.borderColor} hover:shadow-xl transition-all duration-300 cursor-pointer`}
+              className="group p-8 rounded-2xl border-2 bg-gray-800 border-gray-700 hover:border-gray-600 hover:shadow-xl transition-all duration-300 cursor-pointer"
               tabIndex={0}
               role="button"
               aria-label={`Feature: ${feature.title}`}
@@ -288,17 +288,17 @@ export function Features() {
                 <feature.icon className="text-white" size={28} />
               </div>
               
-              <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-monad-600 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-monad-400 transition-colors">
                 {feature.title}
               </h3>
               
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 {feature.description}
               </p>
               
-              <div className="mt-6 flex items-center text-monad-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="mt-6 flex items-center text-monad-400 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span>Learn more</span>
-                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2" />
               </div>
             </motion.div>
           ))}
@@ -382,7 +382,10 @@ export function Features() {
 
       {/* Feature Modal */}
       {selectedFeature && (
-        <FeatureModal feature={features.find(f => f.id === selectedFeature)} />
+        <FeatureModal 
+          feature={features.find(f => f.id === selectedFeature)!}
+          onClose={() => setSelectedFeature(null)}
+        />
       )}
     </section>
   )

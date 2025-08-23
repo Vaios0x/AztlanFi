@@ -3,6 +3,209 @@ import { parseEther, formatEther } from 'viem';
 import { getContractAddresses } from './contracts';
 
 // ============================================================================
+// AZTLANFI CORE ABI - Funciones principales con integración de partners
+// ============================================================================
+const AZTLANFI_CORE_ABI = [
+  // Enviar remesa con integración de partners
+  {
+    "inputs": [
+      { "internalType": "address", "name": "recipient", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "string", "name": "corridor", "type": "string" },
+      { "internalType": "string", "name": "offRampMethod", "type": "string" },
+      { "internalType": "string", "name": "phoneHash", "type": "string" },
+      { "internalType": "string", "name": "partnerIntegration", "type": "string" },
+      { "internalType": "bool", "name": "gaslessTransaction", "type": "bool" },
+      { "internalType": "string", "name": "socialLoginProvider", "type": "string" },
+      { "internalType": "uint256", "name": "savingsGoalId", "type": "uint256" }
+    ],
+    "name": "sendRemittance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  // Obtener corredor
+  {
+    "inputs": [{ "internalType": "string", "name": "corridor", "type": "string" }],
+    "name": "getCorridor",
+    "outputs": [{
+      "components": [
+        { "internalType": "string", "name": "from", "type": "string" },
+        { "internalType": "string", "name": "to", "type": "string" },
+        { "internalType": "uint256", "name": "totalVolume", "type": "uint256" },
+        { "internalType": "uint256", "name": "feePercentage", "type": "uint256" },
+        { "internalType": "bool", "name": "active", "type": "bool" },
+        { "internalType": "address", "name": "liquidityPool", "type": "address" },
+        { "internalType": "uint256", "name": "dailyLimit", "type": "uint256" },
+        { "internalType": "uint256", "name": "monthlyLimit", "type": "uint256" },
+        { "internalType": "uint256", "name": "dailyUsed", "type": "uint256" },
+        { "internalType": "uint256", "name": "monthlyUsed", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastDailyReset", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastMonthlyReset", "type": "uint256" }
+      ],
+      "internalType": "struct AztlanFiCore.Corridor",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  // Obtener remesa
+  {
+    "inputs": [{ "internalType": "uint256", "name": "remittanceId", "type": "uint256" }],
+    "name": "getRemittance",
+    "outputs": [{
+      "components": [
+        { "internalType": "address", "name": "sender", "type": "address" },
+        { "internalType": "address", "name": "recipient", "type": "address" },
+        { "internalType": "uint256", "name": "amount", "type": "uint256" },
+        { "internalType": "string", "name": "corridor", "type": "string" },
+        { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
+        { "internalType": "uint256", "name": "fee", "type": "uint256" },
+        { "internalType": "bool", "name": "completed", "type": "bool" },
+        { "internalType": "string", "name": "offRampMethod", "type": "string" },
+        { "internalType": "bytes32", "name": "id", "type": "bytes32" },
+        { "internalType": "string", "name": "phoneHash", "type": "string" },
+        { "internalType": "string", "name": "partnerIntegration", "type": "string" },
+        { "internalType": "bool", "name": "gaslessTransaction", "type": "bool" },
+        { "internalType": "string", "name": "socialLoginProvider", "type": "string" },
+        { "internalType": "uint256", "name": "savingsGoalId", "type": "uint256" },
+        { "internalType": "bool", "name": "analyticsTracked", "type": "bool" }
+      ],
+      "internalType": "struct AztlanFiCore.Remittance",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
+
+// ============================================================================
+// PARTNER INTEGRATIONS ABI - Funciones de integración con partners
+// ============================================================================
+const PARTNER_INTEGRATIONS_ABI = [
+  // 0x Protocol Integration
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "remittanceId", "type": "uint256" },
+      { "internalType": "bool", "name": "gasless", "type": "bool" },
+      { "internalType": "uint256", "name": "gasSaved", "type": "uint256" }
+    ],
+    "name": "processZeroXTransaction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  // Reown AppKit Integration
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "string", "name": "provider", "type": "string" }
+    ],
+    "name": "processReownLogin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  // Envio Analytics Integration
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "eventId", "type": "bytes32" },
+      { "internalType": "string", "name": "eventType", "type": "string" },
+      { "internalType": "string", "name": "data", "type": "string" }
+    ],
+    "name": "indexAnalyticsEvent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  // Para Wallet Integration
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "uint256", "name": "goalId", "type": "uint256" },
+      { "internalType": "uint256", "name": "targetAmount", "type": "uint256" }
+    ],
+    "name": "createParaSavingsGoal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  // Obtener estadísticas de partners
+  {
+    "inputs": [],
+    "name": "getZeroXStats",
+    "outputs": [{
+      "components": [
+        { "internalType": "uint256", "name": "totalGaslessTransactions", "type": "uint256" },
+        { "internalType": "uint256", "name": "totalGasSaved", "type": "uint256" },
+        { "internalType": "uint256", "name": "averageRouteOptimization", "type": "uint256" },
+        { "internalType": "uint256", "name": "successRate", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastUpdate", "type": "uint256" }
+      ],
+      "internalType": "struct PartnerIntegrations.ZeroXStats",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getReownStats",
+    "outputs": [{
+      "components": [
+        { "internalType": "uint256", "name": "totalSocialLogins", "type": "uint256" },
+        { "internalType": "uint256", "name": "telegramUsers", "type": "uint256" },
+        { "internalType": "uint256", "name": "farcasterUsers", "type": "uint256" },
+        { "internalType": "uint256", "name": "totalUsers", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastUpdate", "type": "uint256" }
+      ],
+      "internalType": "struct PartnerIntegrations.ReownStats",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getEnvioStats",
+    "outputs": [{
+      "components": [
+        { "internalType": "uint256", "name": "indexedEvents", "type": "uint256" },
+        { "internalType": "uint256", "name": "realTimeQueries", "type": "uint256" },
+        { "internalType": "uint256", "name": "averageQueryTime", "type": "uint256" },
+        { "internalType": "uint256", "name": "uptime", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastUpdate", "type": "uint256" }
+      ],
+      "internalType": "struct PartnerIntegrations.EnvioStats",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getParaStats",
+    "outputs": [{
+      "components": [
+        { "internalType": "uint256", "name": "totalLocked", "type": "uint256" },
+        { "internalType": "uint256", "name": "averageGoalAmount", "type": "uint256" },
+        { "internalType": "uint256", "name": "lastUpdate", "type": "uint256" }
+      ],
+      "internalType": "struct PartnerIntegrations.ParaStats",
+      "name": "",
+      "type": "tuple"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
+
+// ============================================================================
 // REMITTANCE POOL ABI - Funciones principales
 // ============================================================================
 const REMITTANCE_POOL_ABI = [
@@ -751,6 +954,108 @@ const EXCHANGE_RATE_ORACLE_ABI = [
 // ============================================================================
 // HOOKS PRINCIPALES
 // ============================================================================
+
+export function useAztlanFiCore() {
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+  
+  const contractAddresses = getContractAddresses(chainId);
+  
+  // Send remittance with partner integration
+  const { data: sendRemittanceData, writeContract: sendRemittance, isPending: isSendingRemittance } = useContractWrite();
+  
+  const executeSendRemittance = (params: any) => {
+    sendRemittance({
+      address: contractAddresses.AztlanFiCore as `0x${string}`,
+      abi: AZTLANFI_CORE_ABI,
+      functionName: 'sendRemittance',
+      ...params
+    });
+  };
+  
+  return {
+    userBalance: '0', // Simplified for now
+    isLoadingBalance: false,
+    getCorridorStats: () => ({}),
+    sendRemittance: executeSendRemittance,
+    isSendingRemittance,
+    sendRemittanceData
+  };
+}
+
+export function usePartnerIntegrations() {
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+  
+  const contractAddresses = getContractAddresses(chainId);
+  
+  // Process 0x transaction
+  const { writeContract: processZeroXTransaction, isPending: isProcessingZeroX } = useContractWrite();
+  
+  const executeProcessZeroX = (params: any) => {
+    processZeroXTransaction({
+      address: contractAddresses.PartnerIntegrations as `0x${string}`,
+      abi: PARTNER_INTEGRATIONS_ABI,
+      functionName: 'processZeroXTransaction',
+      ...params
+    });
+  };
+  
+  // Process Reown login
+  const { writeContract: processReownLogin, isPending: isProcessingReown } = useContractWrite();
+  
+  const executeProcessReown = (params: any) => {
+    processReownLogin({
+      address: contractAddresses.PartnerIntegrations as `0x${string}`,
+      abi: PARTNER_INTEGRATIONS_ABI,
+      functionName: 'processReownLogin',
+      ...params
+    });
+  };
+  
+  // Index analytics event
+  const { writeContract: indexAnalyticsEvent, isPending: isIndexingAnalytics } = useContractWrite();
+  
+  const executeIndexAnalytics = (params: any) => {
+    indexAnalyticsEvent({
+      address: contractAddresses.PartnerIntegrations as `0x${string}`,
+      abi: PARTNER_INTEGRATIONS_ABI,
+      functionName: 'indexAnalyticsEvent',
+      ...params
+    });
+  };
+  
+  // Create Para savings goal
+  const { writeContract: createParaSavingsGoal, isPending: isCreatingParaGoal } = useContractWrite();
+  
+  const executeCreateParaGoal = (params: any) => {
+    createParaSavingsGoal({
+      address: contractAddresses.PartnerIntegrations as `0x${string}`,
+      abi: PARTNER_INTEGRATIONS_ABI,
+      functionName: 'createParaSavingsGoal',
+      ...params
+    });
+  };
+  
+  return {
+    zeroXStats: null,
+    reownStats: null,
+    envioStats: null,
+    paraStats: null,
+    isLoadingZeroX: false,
+    isLoadingReown: false,
+    isLoadingEnvio: false,
+    isLoadingPara: false,
+    processZeroXTransaction: executeProcessZeroX,
+    processReownLogin: executeProcessReown,
+    indexAnalyticsEvent: executeIndexAnalytics,
+    createParaSavingsGoal: executeCreateParaGoal,
+    isProcessingZeroX,
+    isProcessingReown,
+    isIndexingAnalytics,
+    isCreatingParaGoal
+  };
+}
 
 export function useRemittancePool() {
   const { address } = useAccount();

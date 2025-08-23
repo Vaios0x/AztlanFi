@@ -87,90 +87,74 @@ export function WhatsAppCTA() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-white rounded-2xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
+        className="bg-gray-800 rounded-2xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto border border-gray-700"
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold text-gray-900">Send WhatsApp Message</h3>
+          <h3 className="text-2xl font-bold text-white">Send WhatsApp Message</h3>
           <button
             onClick={() => setShowMessageModal(false)}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 hover:text-gray-200 transition-colors"
             aria-label="Close modal"
           >
             <X size={24} />
           </button>
         </div>
 
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
-              Choose a message or write your own:
-            </label>
-            <div className="space-y-3">
-              {predefinedMessages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                    selectedMessage === msg.message ? 'border-monad-600 bg-monad-50' : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                  onClick={() => setSelectedMessage(msg.message)}
+        <div className="space-y-4 mb-6">
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Select or write your message:
+          </label>
+          <select
+            value={selectedMessage}
+            onChange={(e) => setSelectedMessage(e.target.value)}
+            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          >
+            <option value="">Choose a message...</option>
+            {predefinedMessages.map((msg) => (
+              <option key={msg.id} value={msg.message}>
+                {msg.title}
+              </option>
+            ))}
+          </select>
+          
+          {selectedMessage && (
+            <div className="p-4 bg-gray-700 rounded-lg border border-gray-600">
+              <div className="flex justify-between items-start mb-2">
+                <p className="text-sm text-gray-300">Preview:</p>
+                <button
+                  onClick={() => copyToClipboard(selectedMessage)}
+                  className="text-green-400 hover:text-green-300 transition-colors"
                 >
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-gray-900 text-sm">{msg.title}</h4>
-                      {msg.id === 'custom' ? (
-                        <textarea
-                          value={selectedMessage}
-                          onChange={(e) => setSelectedMessage(e.target.value)}
-                          className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-monad-500 focus:border-transparent text-sm"
-                          placeholder="Write your custom message here..."
-                          rows={3}
-                          onClick={(e) => e.stopPropagation()}
-                        />
-                      ) : (
-                        <p className="text-gray-600 text-sm mt-1">{msg.message}</p>
-                      )}
-                    </div>
-                    {msg.id !== 'custom' && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          copyToClipboard(msg.message)
-                        }}
-                        className="ml-2 p-1 text-gray-400 hover:text-gray-600 transition-colors"
-                        aria-label="Copy message"
-                      >
-                        {copied ? <Check size={16} /> : <Copy size={16} />}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  {copied ? <Check size={16} /> : <Copy size={16} />}
+                </button>
+              </div>
+              <p className="text-white text-sm">{selectedMessage}</p>
             </div>
-          </div>
+          )}
+        </div>
 
-          <div className="flex gap-3">
-            <button
-              onClick={() => setShowMessageModal(false)}
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSendMessage}
-              disabled={!selectedMessage}
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              <MessageCircle size={20} />
-              Send via WhatsApp
-            </button>
-          </div>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowMessageModal(false)}
+            className="flex-1 px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSendMessage}
+            disabled={!selectedMessage}
+            className="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            <MessageCircle size={20} />
+            Send via WhatsApp
+          </button>
         </div>
       </motion.div>
     </div>
   )
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <motion.div
@@ -179,13 +163,13 @@ export function WhatsAppCTA() {
             transition={{ duration: 0.8 }}
             className="mb-12"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-              <MessageCircle className="w-8 h-8 text-green-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6">
+              <MessageCircle className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Chat with AztlanFi on WhatsApp
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Get instant support, track your transactions, and send money directly through WhatsApp. 
               It's the easiest way to manage your remittances.
             </p>
@@ -199,15 +183,15 @@ export function WhatsAppCTA() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card text-center p-6"
+                className="bg-gray-800 border border-gray-700 rounded-xl text-center p-6"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-monad-100 rounded-xl mb-4">
-                  <feature.icon className="w-6 h-6 text-monad-600" />
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-monad-600 rounded-xl mb-4">
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-lg font-bold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-300 text-sm">
                   {feature.description}
                 </p>
               </motion.div>
@@ -223,14 +207,14 @@ export function WhatsAppCTA() {
           >
             <button
               onClick={handleWhatsAppClick}
-              className="btn-primary flex items-center gap-2 text-lg px-8 py-4"
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 hover:shadow-lg transition-all duration-200"
             >
               <MessageCircle size={20} />
               Open WhatsApp
             </button>
             <button 
               onClick={() => setShowMessageModal(true)}
-              className="btn-secondary flex items-center gap-2 text-lg px-8 py-4"
+              className="bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 border border-gray-700 hover:bg-gray-700 transition-all duration-200"
             >
               <Send size={20} />
               Send Message

@@ -7,10 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "compile": "npx hardhat compile",
+    "deploy:monad": "npx hardhat run scripts/deploy-monad.js --network monad-testnet",
+    "deploy:local": "npx hardhat run scripts/deploy-monad.js --network hardhat",
+    "test": "npx hardhat test",
+    "test:coverage": "npx hardhat coverage",
+    "clean": "npx hardhat clean",
+    "verify:monad": "npx hardhat verify --network monad-testnet"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
+    "@openzeppelin/contracts": "^5.4.0",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-toast": "^1.1.5",
     "@rainbow-me/rainbowkit": "^2.0.0",
@@ -18,6 +26,9 @@
     "@reown/appkit-adapter-wagmi": "^1.7.20",
     "@sentry/nextjs": "^7.91.0",
     "@supabase/supabase-js": "^2.39.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -44,7 +55,6 @@
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "@openzeppelin/contracts": "^5.4.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

@@ -324,10 +324,10 @@ Blockchain Data:
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             See How Much You Save
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-300">
             Compare our fees with traditional remittance services
           </p>
         </motion.div>
@@ -342,7 +342,7 @@ Blockchain Data:
               className="space-y-6"
             >
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Amount to Send (USD)
                 </label>
                 <div className="relative">
@@ -351,7 +351,7 @@ Blockchain Data:
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(Number(e.target.value))}
-                    className="input-field pl-10 text-lg w-full"
+                    className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-monad-500 focus:border-transparent text-lg"
                     placeholder="500"
                     min="10"
                     max="10000"
@@ -361,43 +361,43 @@ Blockchain Data:
               </div>
 
               {/* Exchange Rate Display */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-semibold text-blue-900">Exchange Rate</h3>
-                    <p className="text-sm text-blue-700">
+                    <h3 className="font-semibold text-white">Exchange Rate</h3>
+                    <p className="text-sm text-gray-300">
                       1 USD = {(exchangeRate || currentRate || 17).toFixed(2)} MXN
                     </p>
                   </div>
                   <button
                     onClick={refreshData}
                     disabled={isRefreshing}
-                    className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors disabled:opacity-50"
+                    className="p-2 text-blue-400 hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50"
                     aria-label="Refresh data"
                   >
                     <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                   </button>
                 </div>
                 <div className="mt-2 text-right">
-                  <p className="text-lg font-bold text-blue-900">
+                  <p className="text-lg font-bold text-white">
                     ${(amount * (exchangeRate || currentRate || 17)).toFixed(2)} MXN
                   </p>
-                  <p className="text-xs text-blue-600">You will receive in Mexico</p>
+                  <p className="text-xs text-blue-400">You will receive in Mexico</p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700">
                   <div className="flex items-center space-x-3">
-                    <Zap className="text-green-600" size={20} />
+                    <Zap className="text-green-400" size={20} />
                     <div>
-                      <p className="font-semibold text-green-800">AztlanFi Fee</p>
-                      <p className="text-sm text-green-600">
+                      <p className="font-semibold text-white">AztlanFi Fee</p>
+                      <p className="text-sm text-green-400">
                         {calculatedFee ? 'Dynamic fee' : 'Only 0.5%'}
                       </p>
                     </div>
                   </div>
-                  <span className="text-2xl font-bold text-green-800">
+                  <span className="text-2xl font-bold text-green-400">
                     ${fees.aztlanfi.toFixed(2)}
                   </span>
                 </div>
@@ -411,25 +411,25 @@ Blockchain Data:
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-4"
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Compare with Traditional Services</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Compare with Traditional Services</h3>
               
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+                <div className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700">
                   <div>
-                    <p className="font-semibold text-red-800">Western Union</p>
-                    <p className="text-sm text-red-600">8% commission</p>
+                    <p className="font-semibold text-red-400">Western Union</p>
+                    <p className="text-sm text-red-300">8% commission</p>
                   </div>
-                  <span className="text-xl font-bold text-red-800">
+                  <span className="text-xl font-bold text-red-400">
                     ${fees.westernUnion.toFixed(2)}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <div className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700">
                   <div>
-                    <p className="font-semibold text-orange-800">MoneyGram</p>
-                    <p className="text-sm text-orange-600">7% commission</p>
+                    <p className="font-semibold text-orange-400">MoneyGram</p>
+                    <p className="text-sm text-orange-300">7% commission</p>
                   </div>
-                  <span className="text-xl font-bold text-orange-800">
+                  <span className="text-xl font-bold text-orange-400">
                     ${fees.moneyGram.toFixed(2)}
                   </span>
                 </div>
@@ -466,18 +466,18 @@ Blockchain Data:
               </button>
 
               {/* Blockchain Status */}
-              <div className="mt-4 p-3 bg-gray-100 rounded-lg">
+              <div className="mt-4 p-3 bg-gray-800 rounded-lg border border-gray-700">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Blockchain Status:</span>
+                  <span className="text-gray-300">Blockchain Status:</span>
                   <div className="flex items-center space-x-2">
                     <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                    <span className={isConnected ? 'text-green-600' : 'text-red-600'}>
+                    <span className={isConnected ? 'text-green-400' : 'text-red-400'}>
                       {isConnected ? 'Connected' : 'Disconnected'}
                     </span>
                   </div>
                 </div>
                 {!isConnected && (
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-400 mt-1">
                     Connect your wallet for real-time data
                   </p>
                 )}

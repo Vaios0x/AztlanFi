@@ -1,7 +1,7 @@
 {
-  "name": "AztlanFi",
+  "name": "AztlanFi - Global Payment Bridge",
   "short_name": "AztlanFi",
-  "description": "Remesas instantáneas México-USA usando blockchain Monad",
+  "description": "Global LatAm-Asia-USA Payment Bridge on Monad Blockchain",
   "theme_color": "#9333ea",
   "background_color": "#0f0f0f",
   "display": "standalone",
@@ -22,16 +22,16 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["finance", "business"],
-  "lang": "es-MX",
+  "categories": ["finance", "business", "utilities"],
+  "lang": "en",
   "dir": "ltr",
   "prefer_related_applications": false,
   "related_applications": [],
   "shortcuts": [
     {
-      "name": "Enviar Dinero",
-      "short_name": "Enviar",
-      "description": "Enviar dinero a México",
+      "name": "Send Money",
+      "short_name": "Send",
+      "description": "Send money globally",
       "url": "/send",
       "icons": [
         {
@@ -41,10 +41,34 @@
       ]
     },
     {
-      "name": "Recibir Dinero",
-      "short_name": "Recibir",
-      "description": "Recibir dinero de Estados Unidos",
+      "name": "Receive Money",
+      "short_name": "Receive",
+      "description": "Receive money from anywhere",
       "url": "/receive",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Live Dashboard",
+      "short_name": "Dashboard",
+      "description": "Real-time payment analytics",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Savings Goals",
+      "short_name": "Savings",
+      "description": "Manage your savings goals",
+      "url": "/dashboard/savings",
       "icons": [
         {
           "src": "/icon-192x192.png",
