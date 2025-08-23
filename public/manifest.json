@@ -1,0 +1,56 @@
+{
+  "name": "AztlanFi",
+  "short_name": "AztlanFi",
+  "description": "Remesas instantáneas México-USA usando blockchain Monad",
+  "theme_color": "#9333ea",
+  "background_color": "#0f0f0f",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business"],
+  "lang": "es-MX",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "Enviar Dinero",
+      "short_name": "Enviar",
+      "description": "Enviar dinero a México",
+      "url": "/send",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Recibir Dinero",
+      "short_name": "Recibir",
+      "description": "Recibir dinero de Estados Unidos",
+      "url": "/receive",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
