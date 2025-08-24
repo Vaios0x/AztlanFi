@@ -48,6 +48,10 @@
     @apply bg-gradient-to-r from-monad-600 to-purple-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-monad-500 focus:ring-offset-2;
   }
   
+  .btn-primary-compact {
+    @apply bg-gradient-to-r from-monad-600 to-purple-700 text-white px-3 py-1.5 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-monad-500 focus:ring-offset-2 text-sm;
+  }
+  
   .btn-secondary {
     @apply bg-white text-monad-600 border-2 border-monad-600 px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 hover:bg-monad-50 active:scale-95 focus:outline-none focus:ring-2 focus:ring-monad-500 focus:ring-offset-2;
   }
@@ -58,37 +62,37 @@
   
   /* Cards con nuevo diseño */
   .card {
-    @apply bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300;
+    @apply bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-6 hover:shadow-xl transition-all duration-300;
   }
   
   .card-gradient {
-    @apply bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300;
+    @apply bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-700 p-6 hover:shadow-xl transition-all duration-300;
   }
   
   /* Corredor cards específicos */
   .corridor-card {
-    @apply bg-gradient-to-br from-blue-50 to-green-50 p-6 rounded-xl border border-blue-100 hover:shadow-lg transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-br from-blue-900 to-green-900 p-6 rounded-xl border border-blue-700 hover:shadow-lg transition-all duration-300 hover:scale-105;
   }
   
   .corridor-card-popular {
-    @apply bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl border-2 border-orange-200 hover:shadow-lg transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-br from-orange-900 to-red-900 p-6 rounded-xl border-2 border-orange-700 hover:shadow-lg transition-all duration-300 hover:scale-105;
   }
   
   /* Badges de estado */
   .badge-success {
-    @apply bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-green-900 text-green-200 px-3 py-1 rounded-full text-sm font-medium;
   }
   
   .badge-warning {
-    @apply bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-yellow-900 text-yellow-200 px-3 py-1 rounded-full text-sm font-medium;
   }
   
   .badge-error {
-    @apply bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-red-900 text-red-200 px-3 py-1 rounded-full text-sm font-medium;
   }
   
   .badge-info {
-    @apply bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-blue-900 text-blue-200 px-3 py-1 rounded-full text-sm font-medium;
   }
   
   /* Animaciones personalizadas */
@@ -130,6 +134,60 @@
   .status-pending {
     @apply bg-yellow-500 animate-pulse;
   }
+  
+  /* Estilos para el web component de Reown AppKit */
+  appkit-button {
+    @apply inline-block w-full sm:w-auto;
+  }
+  
+  appkit-button::part(button) {
+    @apply bg-gradient-to-r from-monad-600 to-purple-700 text-white px-3 py-1.5 sm:px-3 sm:py-1.5 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-monad-500 focus:ring-offset-2 text-sm w-full sm:w-auto flex items-center justify-center min-h-[44px];
+  }
+  
+  /* Estilos responsive para móviles */
+  @media (max-width: 640px) {
+    appkit-button::part(button) {
+      @apply px-4 py-2 text-sm min-h-[48px];
+    }
+    
+    /* Mejorar el modal de Reown AppKit en móviles */
+    appkit-modal {
+      @apply fixed inset-0 z-50;
+    }
+    
+    appkit-modal::part(overlay) {
+      @apply bg-black bg-opacity-50 backdrop-blur-sm;
+    }
+    
+    appkit-modal::part(content) {
+      @apply max-w-sm mx-4 my-8 rounded-xl bg-white shadow-2xl;
+    }
+    
+    /* Mejorar el scroll del modal */
+    appkit-modal::part(content) {
+      @apply max-h-[90vh] overflow-y-auto;
+    }
+    
+    /* Mejorar los botones de wallet en el modal */
+    appkit-modal appkit-button::part(button) {
+      @apply w-full px-4 py-3 text-sm min-h-[48px] mb-2 hover:shadow-md transition-all duration-200;
+    }
+    
+    /* Mejorar el espaciado entre elementos del modal */
+    appkit-modal > * {
+      @apply mb-3;
+    }
+    
+    /* Mejorar el separador "or" */
+    appkit-modal .separator {
+      @apply my-4 text-center text-gray-500;
+    }
+    
+    /* Mejorar el input de email */
+    appkit-modal input[type="email"] {
+      @apply w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-monad-500 focus:border-transparent;
+    }
+  }
 }
 
 @layer utilities {
@@ -140,15 +198,15 @@
   
   /* Utilidades para métricas */
   .metric-card {
-    @apply bg-white rounded-xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300;
+    @apply bg-gray-800 rounded-xl p-6 shadow-md border border-gray-700 hover:shadow-lg transition-all duration-300;
   }
   
   .metric-value {
-    @apply text-3xl font-bold text-gray-900;
+    @apply text-3xl font-bold text-white;
   }
   
   .metric-label {
-    @apply text-sm text-gray-600 uppercase tracking-wide;
+    @apply text-sm text-gray-300 uppercase tracking-wide;
   }
   
   /* Utilidades para transacciones */
@@ -208,6 +266,26 @@
   
   .mobile-full {
     width: 100%;
+  }
+  
+  /* Mejoras específicas para Reown AppKit en móviles */
+  .reown-mobile-optimized {
+    @apply w-full max-w-full;
+  }
+  
+  /* Asegurar que los botones de wallet sean touch-friendly */
+  .wallet-button-mobile {
+    @apply min-h-[44px] px-4 py-2;
+  }
+  
+  /* Mejorar la experiencia táctil en móviles */
+  .touch-friendly {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Optimizar el espaciado en móviles */
+  .mobile-spacing {
+    @apply space-y-3;
   }
 }
 

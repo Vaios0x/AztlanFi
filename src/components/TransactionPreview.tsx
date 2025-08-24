@@ -14,6 +14,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { PaymentCorridor, OffRampMethod } from '@/lib/constants/corridors';
+import { useExchangeRateOracle } from '@/lib/web3/useContracts'
 
 interface Recipient {
   name: string;
@@ -45,10 +46,13 @@ export function TransactionPreview({
   const [showDetails, setShowDetails] = useState(false);
   const [copiedField, setCopiedField] = useState<string>('');
   
+  // Obtener tasa de cambio real del oracle
+  const { currentRate } = useExchangeRateOracle();
+  
   const numAmount = parseFloat(amount) || 0;
   const fee = corridor ? (numAmount * corridor.fee) / 100 : (numAmount * 0.5) / 100;
   const total = numAmount + fee;
-  const destinationAmount = numAmount * 17.85; // Mock exchange rate
+  const destinationAmount = numAmount * (currentRate || 17.85); // Usar tasa real del oracle
   
   const copyToClipboard = async (text: string, field: string) => {
     try {

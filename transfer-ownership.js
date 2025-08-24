@@ -1,100 +1,68 @@
-const { ethers } = require('hardhat');
+const { ethers } = require("hardhat");
 
-async function transferOwnership() {
-  // Configuración
-  const NEW_OWNER = "0x8eC3829793D0a2499971d0D853935F17aB52F800"; // Tu dirección de wallet
-  const DEPLOYER_PRIVATE_KEY = "2003f926c578fea4a77ffdd98a288a3297ee12b8893505562422dd258e4a5765"; // Tu clave privada
-  
-  // Verificar que la clave privada es válida
-  if (!DEPLOYER_PRIVATE_KEY || DEPLOYER_PRIVATE_KEY.length !== 64) {
-    console.error("❌ Error: Clave privada inválida");
-    return;
-  }
+const NEW_OWNER = "0x8eC3829793D0a2499971d0D853935F17aB52F800"; // Tu dirección de wallet
 
-  // Direcciones de contratos desplegados
-  const CONTRACTS = {
-    RemittancePool: "0x138ad2d0d48070dffD6C6DaeaEbADc483CbeE29a",
-    ComplianceModule: "0x025434d9Cd4c77F7acC24f8DF90F07b425eFA953",
-    IncentiveVault: "0x6fF6aD8216dD1454bC977Ebb72C83aD96C034E28",
-    RemittanceToken: "0x2e2e47ab692b8A29c16a38bca3A8523fA520853b",
-    ExchangeRateOracle: "0xFFdCc99Cc7A9DE930716e3fB4a1b153caa740AfC"
-  };
+// Direcciones de contratos desplegados en Monad testnet
+const CONTRACT_ADDRESSES = {
+  RemittancePool: "0x42cCb3EB32ab80433e957260cD7C486ae1BFb9f6",
+  ComplianceModule: "0x1546F9800d28ddff94438A76C8445381E487E1a8",
+  IncentiveVault: "0xdFa24C062fb6fFDBF8fe7431aD8EB2014E841ef2",
+  RemittanceToken: "0xB72EcDa4f600F5a5965C82eB421a551EdC8279D2",
+  ExchangeRateOracle: "0x57439Fa61Ac189DD5fBFaA87113A70C70385cF64",
+  AztlanFiCore: "0x46Ca523e51783a378fBa0D06d05929652D04B19E",
+  PartnerIntegrations: "0xC1eeEDbc9bcB94484157BbC2F8B95D94B1d7e447",
+};
 
-  console.log("🚀 Iniciando transferencia de ownership...");
-  console.log(`📤 Nuevo owner: ${NEW_OWNER}`);
-  console.log("");
+async function main() {
+  console.log("🔄 Transferring ownership of all contracts...");
+  console.log("👤 New owner:", NEW_OWNER);
 
-  // Conectar con la red
-  const provider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
-  const wallet = new ethers.Wallet(DEPLOYER_PRIVATE_KEY, provider);
+  const [deployer] = await ethers.getSigners();
+  console.log("📝 Current owner:", deployer.address);
 
-  console.log(`🔗 Conectado con wallet: ${wallet.address}`);
-  console.log("");
-
-  // ABI mínimo para transferOwnership
-  const OWNER_ABI = [
-    "function owner() view returns (address)",
-    "function transferOwnership(address newOwner) external",
-    "function authorizedUpdater() view returns (address)",
-    "function setAuthorizedUpdater(address newUpdater) external"
+  // Lista de contratos que tienen función transferOwnership
+  const contractsToTransfer = [
+    { name: "RemittancePool", address: CONTRACT_ADDRESSES.RemittancePool },
+    { name: "ComplianceModule", address: CONTRACT_ADDRESSES.ComplianceModule },
+    { name: "IncentiveVault", address: CONTRACT_ADDRESSES.IncentiveVault },
+    { name: "RemittanceToken", address: CONTRACT_ADDRESSES.RemittanceToken },
+    { name: "ExchangeRateOracle", address: CONTRACT_ADDRESSES.ExchangeRateOracle },
+    { name: "AztlanFiCore", address: CONTRACT_ADDRESSES.AztlanFiCore },
+    { name: "PartnerIntegrations", address: CONTRACT_ADDRESSES.PartnerIntegrations },
   ];
 
-  try {
-    for (const [contractName, contractAddress] of Object.entries(CONTRACTS)) {
-      console.log(`📋 Procesando ${contractName}...`);
+  for (const contract of contractsToTransfer) {
+    try {
+      console.log(`\n🔄 Transferring ownership of ${contract.name}...`);
       
-      const contract = new ethers.Contract(contractAddress, OWNER_ABI, wallet);
+      // Obtener el contrato
+      const contractInstance = await ethers.getContractAt(contract.name, contract.address);
       
-      // Verificar owner actual
-      const currentOwner = await contract.owner();
-      console.log(`   👤 Owner actual: ${currentOwner}`);
+      // Verificar si el contrato tiene función transferOwnership
+      const hasTransferOwnership = contractInstance.interface.hasFunction('transferOwnership');
       
-      if (currentOwner.toLowerCase() === NEW_OWNER.toLowerCase()) {
-        console.log(`   ✅ ${contractName} ya tiene el owner correcto`);
-        continue;
+      if (hasTransferOwnership) {
+        // Transferir ownership
+        const tx = await contractInstance.transferOwnership(NEW_OWNER);
+        console.log(`⏳ Waiting for transaction: ${tx.hash}`);
+        await tx.wait();
+        console.log(`✅ Ownership transferred for ${contract.name}`);
+      } else {
+        console.log(`⚠️  ${contract.name} does not have transferOwnership function`);
       }
-      
-      // Transferir ownership
-      console.log(`   🔄 Transfiriendo ownership a ${NEW_OWNER}...`);
-      const tx = await contract.transferOwnership(NEW_OWNER);
-      await tx.wait();
-      console.log(`   ✅ Ownership transferido! TX: ${tx.hash}`);
-      
-      // Verificar nuevo owner
-      const newOwner = await contract.owner();
-      console.log(`   👤 Nuevo owner: ${newOwner}`);
-      
-      // Caso especial para ExchangeRateOracle (también tiene authorizedUpdater)
-      if (contractName === "ExchangeRateOracle") {
-        console.log(`   🔄 Configurando authorizedUpdater...`);
-        const authTx = await contract.setAuthorizedUpdater(NEW_OWNER);
-        await authTx.wait();
-        console.log(`   ✅ AuthorizedUpdater configurado! TX: ${authTx.hash}`);
-      }
-      
-      console.log("");
+    } catch (error) {
+      console.error(`❌ Error transferring ownership of ${contract.name}:`, error.message);
     }
-    
-    console.log("🎉 ¡Transferencia de ownership completada!");
-    console.log("");
-    console.log("📝 Próximos pasos:");
-    console.log("1. Conecta tu wallet en la aplicación");
-    console.log("2. Ve al panel de administración (/admin)");
-    console.log("3. Verifica que aparezcan todos los badges de Owner");
-    console.log("4. ¡Ya tienes acceso completo al sistema!");
-    
-  } catch (error) {
-    console.error("❌ Error durante la transferencia:", error.message);
-    console.log("");
-    console.log("🔧 Soluciones posibles:");
-    console.log("1. Verifica que tienes la clave privada correcta del deployer");
-    console.log("2. Asegúrate de tener suficiente MONAD para gas");
-    console.log("3. Verifica que la dirección NEW_OWNER es válida");
   }
+
+  console.log("\n🎉 Ownership transfer process completed!");
+  console.log("📋 Next steps:");
+  console.log("1. Verify ownership transfer on MonadScan");
+  console.log("2. Test contract functions with new owner");
+  console.log("3. Update documentation if needed");
 }
 
-// Ejecutar script
-transferOwnership()
+main()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);

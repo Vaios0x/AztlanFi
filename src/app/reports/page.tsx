@@ -412,13 +412,13 @@ export default function ReportsPage() {
           transition={{ delay: 0.1 }}
           className="flex flex-wrap gap-2 bg-gray-800 rounded-xl p-2 border border-gray-700 mb-8 justify-center"
         >
-          {[
-            { id: 'overview', label: 'Vista General', icon: BarChart3, color: 'from-blue-600 to-cyan-600' },
-            { id: 'corridors', label: 'Corredores', icon: Globe, color: 'from-green-600 to-emerald-600' },
-            { id: 'partners', label: 'Partners', icon: Award, color: 'from-purple-600 to-pink-600' },
-            { id: 'sdg', label: 'Impacto SDG', icon: Target, color: 'from-orange-600 to-red-600' },
-            { id: 'analytics', label: 'Analytics', icon: Database, color: 'from-indigo-600 to-purple-600' }
-          ].map(({ id, label, icon: Icon, color }) => (
+                      {[
+              { id: 'overview', label: 'Overview', icon: BarChart3, color: 'from-blue-600 to-cyan-600' },
+              { id: 'corridors', label: 'Corridors', icon: Globe, color: 'from-green-600 to-emerald-600' },
+              { id: 'partners', label: 'Partners', icon: Award, color: 'from-purple-600 to-pink-600' },
+              { id: 'sdg', label: 'SDG Impact', icon: Target, color: 'from-orange-600 to-red-600' },
+              { id: 'analytics', label: 'Analytics', icon: Database, color: 'from-indigo-600 to-purple-600' }
+            ].map(({ id, label, icon: Icon, color }) => (
             <button
               key={id}
               onClick={() => setActiveTab(id as any)}
@@ -625,8 +625,8 @@ export default function ReportsPage() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-gray-900">${(destination.volume / 1000).toFixed(0)}K</p>
-                        <p className="text-sm text-gray-600">{destination.percentage}%</p>
+                                        <p className="font-semibold text-white">${(destination.volume / 1000).toFixed(0)}K</p>
+                <p className="text-sm text-gray-400">{destination.percentage}%</p>
                       </div>
                     </div>
                   ))}
@@ -641,7 +641,7 @@ export default function ReportsPage() {
                 className="card"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Transaction Types</h3>
+                  <h3 className="text-lg font-semibold text-white">Transaction Types</h3>
                   <PieChart className="w-5 h-5 text-monad-600" />
                 </div>
                 <div className="space-y-4">
@@ -651,21 +651,21 @@ export default function ReportsPage() {
                         <div className={`w-4 h-4 rounded-full ${
                           index === 0 ? 'bg-blue-500' : index === 1 ? 'bg-green-500' : 'bg-purple-500'
                         }`} />
-                        <span className="font-medium text-gray-900">{type.type}</span>
+                        <span className="font-medium text-white">{type.type}</span>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-gray-900">{type.count.toLocaleString()}</p>
-                        <p className="text-sm text-gray-600">{type.percentage}%</p>
+                        <p className="font-semibold text-white">{type.count.toLocaleString()}</p>
+                        <p className="text-sm text-gray-400">{type.percentage}%</p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <div className="mt-6 p-4 bg-gray-700 rounded-lg border border-gray-600">
                   <div className="flex items-center gap-2 mb-2">
-                    <Zap className="w-4 h-4 text-monad-600" />
-                    <span className="font-medium text-gray-900">System Efficiency</span>
+                    <Zap className="w-4 h-4 text-monad-400" />
+                    <span className="font-medium text-white">System Efficiency</span>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-300">
                     98.5% of transactions complete in less than 1 second
                   </p>
                 </div>
@@ -679,54 +679,54 @@ export default function ReportsPage() {
                 className="card"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Performance Metrics</h3>
+                  <h3 className="text-lg font-semibold text-white">Performance Metrics</h3>
                   <Target className="w-5 h-5 text-monad-600" />
                 </div>
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600">Average Transaction Time</span>
-                      <span className="font-medium">0.8s</span>
+                      <span className="text-gray-300">Average Transaction Time</span>
+                      <span className="font-medium text-white">0.8s</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-2">
                       <div className="bg-green-500 h-2 rounded-full" style={{ width: '80%' }}></div>
                     </div>
                   </div>
                   
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600">System Uptime</span>
-                      <span className="font-medium">99.9%</span>
+                      <span className="text-gray-300">System Uptime</span>
+                      <span className="font-medium text-white">99.9%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-2">
                       <div className="bg-blue-500 h-2 rounded-full" style={{ width: '99.9%' }}></div>
                     </div>
                   </div>
 
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600">Customer Satisfaction</span>
-                      <span className="font-medium">4.8/5</span>
+                      <span className="text-gray-300">Customer Satisfaction</span>
+                      <span className="font-medium text-white">4.8/5</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-2">
                       <div className="bg-purple-500 h-2 rounded-full" style={{ width: '96%' }}></div>
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-monad-50 to-purple-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-2">Period Summary</h4>
+                  <div className="bg-gradient-to-r from-monad-900 to-purple-900 p-4 rounded-lg border border-monad-700">
+                    <h4 className="font-semibold text-white mb-2">Period Summary</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Growth:</span>
-                        <span className="text-green-600 font-medium">+12.5%</span>
+                        <span className="text-gray-300">Growth:</span>
+                        <span className="text-green-400 font-medium">+12.5%</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">New users:</span>
-                        <span className="font-medium">+2,847</span>
+                        <span className="text-gray-300">New users:</span>
+                        <span className="font-medium text-white">+2,847</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Average savings:</span>
-                        <span className="text-green-600 font-medium">$35/tx</span>
+                        <span className="text-gray-300">Average savings:</span>
+                        <span className="text-green-400 font-medium">$35/tx</span>
                       </div>
                     </div>
                   </div>
@@ -744,15 +744,41 @@ export default function ReportsPage() {
             className="space-y-8"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Corredores de Pago Globales
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Money Transfer Routes
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Análisis detallado de los 32 corredores estratégicos (16 pares bidireccionales) con métricas en tiempo real
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                See how the money you send to different countries flows. Here you can see how much money moves and how fast it arrives.
               </p>
             </div>
 
-            {/* Corridor Metrics Grid */}
+            {/* General Summary */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Globe className="w-5 h-5 text-blue-400" />
+                General Summary
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">32</div>
+                  <div className="text-sm text-gray-400">Active routes</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">20</div>
+                  <div className="text-sm text-gray-400">Connected countries</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">98.5%</div>
+                  <div className="text-sm text-gray-400">Successful transfers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">0.8s</div>
+                  <div className="text-sm text-gray-400">Average time</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Transfer Routes Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {mockData.corridorMetrics.map((corridor, index) => (
                 <motion.div
@@ -760,7 +786,7 @@ export default function ReportsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="card hover-lift"
+                  className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
@@ -768,31 +794,71 @@ export default function ReportsPage() {
                       <ArrowRight className="w-4 h-4 text-gray-400" />
                       <span className="text-2xl">{corridor.toFlag}</span>
                     </div>
-                    <div className="status-indicator status-online" />
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
                   </div>
                   
-                  <h3 className="font-semibold text-gray-900 mb-2">{corridor.name}</h3>
+                  <h3 className="font-semibold text-white mb-4">{corridor.name}</h3>
                   
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Volumen:</span>
-                      <span className="font-medium">${(corridor.volume / 1000).toFixed(0)}K</span>
+                      <span className="text-gray-300">💰 Money sent:</span>
+                      <span className="font-medium text-white">${(corridor.volume / 1000).toFixed(0)}K</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Transacciones:</span>
-                      <span className="font-medium">{corridor.transactions.toLocaleString()}</span>
+                      <span className="text-gray-300">📤 Transfers made:</span>
+                      <span className="font-medium text-white">{corridor.transactions.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Tiempo promedio:</span>
-                      <span className="font-medium text-green-600">{corridor.avgSettlementTime.toFixed(1)}s</span>
+                      <span className="text-gray-300">⚡ Speed:</span>
+                      <span className="font-medium text-green-400">Less than 1 minute</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Ahorro en fees:</span>
-                      <span className="font-medium text-green-600">${(corridor.feeSavings / 1000).toFixed(0)}K</span>
+                      <span className="text-gray-300">💸 Money saved:</span>
+                      <span className="font-medium text-green-400">${(corridor.feeSavings / 1000).toFixed(0)}K</span>
+                    </div>
+                  </div>
+
+                  {/* Success progress bar */}
+                  <div className="mt-4">
+                    <div className="flex justify-between text-xs text-gray-400 mb-1">
+                      <span>Successful transfers</span>
+                      <span>{corridor.successRate.toFixed(1)}%</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${corridor.successRate}%` }}
+                      />
                     </div>
                   </div>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Additional Information */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-400" />
+                What does this mean?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
+                <div>
+                  <h4 className="font-medium text-white mb-2">📊 Money sent</h4>
+                  <p>This is the total amount of money that has been sent through this route in the last month.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">📤 Transfers made</h4>
+                  <p>The total number of times money has been sent through this route.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">⚡ Speed</h4>
+                  <p>How long it takes for the money to arrive from when you send it until it reaches its destination.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">💸 Money saved</h4>
+                  <p>How much money our users have saved compared to other services.</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -805,12 +871,38 @@ export default function ReportsPage() {
             className="space-y-8"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Integraciones de Partners
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Our Technology Partners
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Métricas de rendimiento de todas las integraciones de partners del hackathon
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                We work with the best companies to make your experience easier and faster
               </p>
+            </div>
+
+            {/* Partners Summary */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Award className="w-5 h-5 text-purple-400" />
+                Collaboration Summary
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">4</div>
+                  <div className="text-sm text-gray-400">Partner companies</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">15K+</div>
+                  <div className="text-sm text-gray-400">Connected users</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">99.9%</div>
+                  <div className="text-sm text-gray-400">Uptime</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">$89K</div>
+                  <div className="text-sm text-gray-400">Money saved</div>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -818,34 +910,48 @@ export default function ReportsPage() {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="card"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">0x Protocol</h3>
-                    <p className="text-sm text-gray-600">Gasless Swaps & Route Optimization</p>
+                    <h3 className="text-lg font-semibold text-white">0x Protocol</h3>
+                    <p className="text-sm text-gray-300">Makes transfers cheaper and faster</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Transacciones sin gas:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.oxProtocol.gaslessTransactions.toLocaleString()}</span>
+                    <span className="text-gray-300">⚡ Fee-free transfers:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.oxProtocol.gaslessTransactions.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Gas ahorrado:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.oxProtocol.totalGasSaved} ETH</span>
+                    <span className="text-gray-300">💰 Money saved:</span>
+                    <span className="font-medium text-white">${(mockData.partnerMetrics.oxProtocol.totalGasSaved * 2000).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Optimización promedio:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.oxProtocol.averageRouteOptimization}%</span>
+                    <span className="text-gray-300">🎯 Route improvements:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.oxProtocol.averageRouteOptimization}%</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tasa de éxito:</span>
-                    <span className="font-medium text-green-600">{mockData.partnerMetrics.oxProtocol.successRate}%</span>
+                    <span className="text-gray-300">✅ Successful transfers:</span>
+                    <span className="font-medium text-green-400">{mockData.partnerMetrics.oxProtocol.successRate}%</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Overall performance</span>
+                    <span>{mockData.partnerMetrics.oxProtocol.successRate}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${mockData.partnerMetrics.oxProtocol.successRate}%` }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -854,34 +960,48 @@ export default function ReportsPage() {
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="card"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Reown AppKit</h3>
-                    <p className="text-sm text-gray-600">Social Login & Mini Apps</p>
+                    <h3 className="text-lg font-semibold text-white">Reown AppKit</h3>
+                    <p className="text-sm text-gray-300">Lets you easily sign in with social networks</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Logins sociales:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.reown.socialLogins.toLocaleString()}</span>
+                    <span className="text-gray-300">🔐 Social logins:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.reown.socialLogins.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Usuarios Telegram:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.reown.telegramUsers.toLocaleString()}</span>
+                    <span className="text-gray-300">📱 Telegram users:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.reown.telegramUsers.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Usuarios Farcaster:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.reown.farcasterUsers.toLocaleString()}</span>
+                    <span className="text-gray-300">🌐 Farcaster users:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.reown.farcasterUsers.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Total usuarios:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.reown.totalUsers.toLocaleString()}</span>
+                    <span className="text-gray-300">👥 Total users:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.reown.totalUsers.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Active users</span>
+                    <span>{Math.round((mockData.partnerMetrics.reown.totalUsers / 20000) * 100)}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-purple-500 to-pink-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${(mockData.partnerMetrics.reown.totalUsers / 20000) * 100}%` }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -891,34 +1011,48 @@ export default function ReportsPage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="card"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center">
                     <Database className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Envio Analytics</h3>
-                    <p className="text-sm text-gray-600">Real-time Indexing & Analytics</p>
+                    <h3 className="text-lg font-semibold text-white">Envio Analytics</h3>
+                    <p className="text-sm text-gray-300">Processes all information in real time</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Eventos indexados:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.envio.indexedEvents.toLocaleString()}</span>
+                    <span className="text-gray-300">📊 Data processed:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.envio.indexedEvents.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Consultas en tiempo real:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.envio.realTimeQueries.toLocaleString()}</span>
+                    <span className="text-gray-300">🔍 Live searches:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.envio.realTimeQueries.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tiempo promedio:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.envio.averageQueryTime}s</span>
+                    <span className="text-gray-300">⚡ Speed:</span>
+                    <span className="font-medium text-white">Less than 1 second</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Uptime:</span>
-                    <span className="font-medium text-green-600">{mockData.partnerMetrics.envio.uptime}%</span>
+                    <span className="text-gray-300">🟢 Uptime:</span>
+                    <span className="font-medium text-green-400">{mockData.partnerMetrics.envio.uptime}%</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Service availability</span>
+                    <span>{mockData.partnerMetrics.envio.uptime}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-indigo-500 to-purple-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${mockData.partnerMetrics.envio.uptime}%` }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -928,37 +1062,77 @@ export default function ReportsPage() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="card"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center">
                     <Smartphone className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Para Wallet</h3>
-                    <p className="text-sm text-gray-600">App Clips & Savings Goals</p>
+                    <h3 className="text-lg font-semibold text-white">Para Wallet</h3>
+                    <p className="text-sm text-gray-300">Helps you save and pay from your phone</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Pagos App Clip:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.para.appClipPayments.toLocaleString()}</span>
+                    <span className="text-gray-300">📱 Mobile payments:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.para.appClipPayments.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Metas de ahorro:</span>
-                    <span className="font-medium">{mockData.partnerMetrics.para.savingsGoals.toLocaleString()}</span>
+                    <span className="text-gray-300">🎯 Savings goals:</span>
+                    <span className="font-medium text-white">{mockData.partnerMetrics.para.savingsGoals.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Total bloqueado:</span>
-                    <span className="font-medium">${mockData.partnerMetrics.para.totalLocked.toLocaleString()}</span>
+                    <span className="text-gray-300">💰 Money saved:</span>
+                    <span className="font-medium text-white">${mockData.partnerMetrics.para.totalLocked.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Promedio por meta:</span>
-                    <span className="font-medium">${mockData.partnerMetrics.para.averageGoalAmount}</span>
+                    <span className="text-gray-300">📈 Average per goal:</span>
+                    <span className="font-medium text-white">${mockData.partnerMetrics.para.averageGoalAmount}</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Completed goals</span>
+                    <span>{Math.round((mockData.partnerMetrics.para.savingsGoals / 1000) * 100)}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-green-500 to-emerald-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${(mockData.partnerMetrics.para.savingsGoals / 1000) * 100}%` }}
+                    />
                   </div>
                 </div>
               </motion.div>
+            </div>
+
+            {/* Additional Information */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-400" />
+                Why do we work with these companies?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
+                <div>
+                  <h4 className="font-medium text-white mb-2">🤝 Collaboration</h4>
+                  <p>Each company helps us do something specific better: faster, cheaper, or easier to use.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">💡 Innovation</h4>
+                  <p>We use the best available technologies to give you the best possible experience.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">🛡️ Security</h4>
+                  <p>All these companies are leaders in their fields and maintain high security standards.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">📈 Growth</h4>
+                  <p>Together we can serve more people and make sending money more accessible for everyone.</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -971,144 +1145,252 @@ export default function ReportsPage() {
             className="space-y-8"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Impacto en Objetivos de Desarrollo Sostenible
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Our Impact on the World
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Métricas de impacto alineadas con los ODS de la ONU para el hackathon BGA
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                See how we help make the world a better place. We work with UN goals to help people.
               </p>
             </div>
 
+            {/* Impact Summary */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Target className="w-5 h-5 text-green-400" />
+                Summary of Our Impact
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">15K+</div>
+                  <div className="text-sm text-gray-400">People helped</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">$1.25M</div>
+                  <div className="text-sm text-gray-400">Money saved</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">20</div>
+                  <div className="text-sm text-gray-400">Connected countries</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">93%</div>
+                  <div className="text-sm text-gray-400">Lower costs</div>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* SDG 1 */}
+              {/* Meta 1: Sin Pobreza */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="card bg-gradient-to-r from-red-50 to-orange-50 border-red-200"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-orange-600 rounded-xl flex items-center justify-center">
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">SDG 1: No Poverty</h3>
-                    <p className="text-sm text-gray-600">Reducción de pobreza</p>
+                    <h3 className="text-lg font-semibold text-white">Goal 1: No Poverty</h3>
+                    <p className="text-sm text-gray-300">We help people save money</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Usuarios beneficiados:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg1.usersSaved.toLocaleString()}</span>
+                    <span className="text-gray-300">👥 People who saved:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg1.usersSaved.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Total ahorrado:</span>
-                    <span className="font-medium">${(mockData.sdgImpact.sdg1.totalSaved / 1000000).toFixed(1)}M</span>
+                    <span className="text-gray-300">💰 Total saved:</span>
+                    <span className="font-medium text-white">${(mockData.sdgImpact.sdg1.totalSaved / 1000000).toFixed(1)}M</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Ahorro promedio:</span>
-                    <span className="font-medium text-green-600">${mockData.sdgImpact.sdg1.averageSavingPerUser}</span>
+                    <span className="text-gray-300">💸 Savings per person:</span>
+                    <span className="font-medium text-green-400">${mockData.sdgImpact.sdg1.averageSavingPerUser}</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Goal achieved</span>
+                    <span>75%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-red-500 to-orange-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: '75%' }}
+                    />
                   </div>
                 </div>
               </motion.div>
 
-              {/* SDG 8 */}
+              {/* Meta 8: Trabajo Decente */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="card bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">SDG 8: Decent Work</h3>
-                    <p className="text-sm text-gray-600">Trabajo decente y crecimiento</p>
+                    <h3 className="text-lg font-semibold text-white">Goal 8: Decent Work</h3>
+                    <p className="text-sm text-gray-300">We help unbanked people</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">No bancarizados servidos:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg8.unbankedServed.toLocaleString()}</span>
+                    <span className="text-gray-300">🏦 Unbanked helped:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg8.unbankedServed.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Trabajos transfronterizos:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg8.crossBorderJobs.toLocaleString()}</span>
+                    <span className="text-gray-300">💼 Jobs created:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg8.crossBorderJobs.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Actividad económica:</span>
-                    <span className="font-medium">${(mockData.sdgImpact.sdg8.economicActivity / 1000000).toFixed(1)}M</span>
+                    <span className="text-gray-300">📈 Economic activity:</span>
+                    <span className="font-medium text-white">${(mockData.sdgImpact.sdg8.economicActivity / 1000000).toFixed(1)}M</span>
+                  </div>
+                </div>
+
+                {/* Barra de progreso */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Meta alcanzada</span>
+                    <span>68%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: '68%' }}
+                    />
                   </div>
                 </div>
               </motion.div>
 
-              {/* SDG 10 */}
+              {/* Meta 10: Menos Desigualdad */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="card bg-gradient-to-r from-green-50 to-emerald-50 border-green-200"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center">
                     <Globe className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">SDG 10: Reduced Inequalities</h3>
-                    <p className="text-sm text-gray-600">Reducción de desigualdades</p>
+                    <h3 className="text-lg font-semibold text-white">Goal 10: Reduced Inequalities</h3>
+                    <p className="text-sm text-gray-300">We make sending money easier</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Corredores habilitados:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg10.corridorsEnabled}</span>
+                    <span className="text-gray-300">🌍 Available routes:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg10.corridorsEnabled}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Reducción de costos:</span>
-                    <span className="font-medium text-green-600">{mockData.sdgImpact.sdg10.costReduction}%</span>
+                    <span className="text-gray-300">💸 Lower costs:</span>
+                    <span className="font-medium text-green-400">{mockData.sdgImpact.sdg10.costReduction}%</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Puntuación accesibilidad:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg10.accessibilityScore}%</span>
+                    <span className="text-gray-300">✅ Easy to use:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg10.accessibilityScore}%</span>
+                  </div>
+                </div>
+
+                {/* Barra de progreso */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Meta alcanzada</span>
+                    <span>92%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-green-500 to-emerald-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: '92%' }}
+                    />
                   </div>
                 </div>
               </motion.div>
 
-              {/* SDG 17 */}
+              {/* Meta 17: Alianzas */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="card bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center">
                     <Award className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">SDG 17: Partnerships</h3>
-                    <p className="text-sm text-gray-600">Alianzas para los objetivos</p>
+                    <h3 className="text-lg font-semibold text-white">Goal 17: Partnerships</h3>
+                    <p className="text-sm text-gray-300">We work with the best companies</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Partners integrados:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg17.partnersIntegrated}</span>
+                    <span className="text-gray-300">🤝 Partner companies:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg17.partnersIntegrated}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Países conectados:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg17.countriesConnected}</span>
+                    <span className="text-gray-300">🌍 Connected countries:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg17.countriesConnected}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Proveedores de liquidez:</span>
-                    <span className="font-medium">{mockData.sdgImpact.sdg17.liquidityProviders}</span>
+                    <span className="text-gray-300">💳 Payment providers:</span>
+                    <span className="font-medium text-white">{mockData.sdgImpact.sdg17.liquidityProviders}</span>
+                  </div>
+                </div>
+
+                {/* Barra de progreso */}
+                <div className="mt-4">
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>Meta alcanzada</span>
+                    <span>85%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-purple-500 to-pink-400 h-2 rounded-full transition-all duration-500"
+                      style={{ width: '85%' }}
+                    />
                   </div>
                 </div>
               </motion.div>
+            </div>
+
+            {/* Additional Information */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-400" />
+                What are these goals?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
+                <div>
+                  <h4 className="font-medium text-white mb-2">🎯 UN Goals</h4>
+                  <p>These are 17 objectives that the UN created to make the world a better place. We work on 4 of them.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">💡 Our Commitment</h4>
+                  <p>We want to make sending money easier, cheaper, and more accessible for all people in the world.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">📊 We Measure Our Impact</h4>
+                  <p>We keep track of how many people we help and how much money they save using our service.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">🌱 Sustainable Growth</h4>
+                  <p>We work so that our business helps people and the planet at the same time.</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -1121,12 +1403,38 @@ export default function ReportsPage() {
             className="space-y-8"
           >
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Analytics en Tiempo Real
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Live Statistics
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Dashboard avanzado con métricas en tiempo real powered by Envio
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                See what's happening right now in our service. Here you can see in real time how everything is going.
               </p>
+            </div>
+
+            {/* Current Status Summary */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-green-400" />
+                Current Service Status
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">🟢</div>
+                  <div className="text-sm text-gray-400">All systems working</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">⚡</div>
+                  <div className="text-sm text-gray-400">Very fast</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">🛡️</div>
+                  <div className="text-sm text-gray-400">Secure</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">📱</div>
+                  <div className="text-sm text-gray-400">Available 24/7</div>
+                </div>
+              </div>
             </div>
 
             {/* Real-time Metrics */}
@@ -1134,17 +1442,17 @@ export default function ReportsPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="card bg-gradient-to-r from-blue-500 to-cyan-600 text-white"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm opacity-90 mb-1">Transacciones Activas</p>
-                    <p className="text-2xl font-bold">
+                    <p className="text-sm text-gray-300 mb-1">📤 Transfers in Progress</p>
+                    <p className="text-2xl font-bold text-white">
                       {mockData.realTimeData.activeTransactions}
                     </p>
-                    <p className="text-sm opacity-80">Procesando ahora</p>
+                    <p className="text-sm text-green-400">Arriving now</p>
                   </div>
-                  <Activity className="w-8 h-8 opacity-80" />
+                  <Activity className="w-8 h-8 text-blue-400" />
                 </div>
               </motion.div>
 
@@ -1152,17 +1460,17 @@ export default function ReportsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="card bg-gradient-to-r from-green-500 to-emerald-600 text-white"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm opacity-90 mb-1">Network TPS</p>
-                    <p className="text-2xl font-bold">
-                      {mockData.realTimeData.networkTPS.toLocaleString()}
+                    <p className="text-sm text-gray-300 mb-1">⚡ System Speed</p>
+                    <p className="text-2xl font-bold text-white">
+                      {Math.round(mockData.realTimeData.networkTPS / 1000)}K
                     </p>
-                    <p className="text-sm opacity-80">Monad Blockchain</p>
+                    <p className="text-sm text-green-400">Operations per second</p>
                   </div>
-                  <Zap className="w-8 h-8 opacity-80" />
+                  <Zap className="w-8 h-8 text-green-400" />
                 </div>
               </motion.div>
 
@@ -1170,17 +1478,17 @@ export default function ReportsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="card bg-gradient-to-r from-purple-500 to-pink-600 text-white"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm opacity-90 mb-1">Gas Price</p>
-                    <p className="text-2xl font-bold">
-                      {mockData.realTimeData.averageGasPrice} Gwei
+                    <p className="text-sm text-gray-300 mb-1">💰 Current Costs</p>
+                    <p className="text-2xl font-bold text-white">
+                      ${mockData.realTimeData.averageGasPrice}
                     </p>
-                    <p className="text-sm opacity-80">Promedio actual</p>
+                    <p className="text-sm text-green-400">Very low</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 opacity-80" />
+                  <TrendingDown className="w-8 h-8 text-purple-400" />
                 </div>
               </motion.div>
 
@@ -1188,49 +1496,78 @@ export default function ReportsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="card bg-gradient-to-r from-orange-500 to-red-600 text-white"
+                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm opacity-90 mb-1">Network Health</p>
-                    <p className="text-2xl font-bold">
+                    <p className="text-sm text-gray-300 mb-1">🛡️ Service Status</p>
+                    <p className="text-2xl font-bold text-white">
                       {mockData.realTimeData.networkHealth}%
                     </p>
-                    <p className="text-sm opacity-80">Salud de la red</p>
+                    <p className="text-sm text-green-400">Excellent</p>
                   </div>
-                  <Shield className="w-8 h-8 opacity-80" />
+                  <Shield className="w-8 h-8 text-orange-400" />
                 </div>
               </motion.div>
             </div>
 
-            {/* Off-ramp Methods Performance */}
+            {/* Payment Methods */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="card"
+              className="bg-gray-800 rounded-2xl p-6 border border-gray-700"
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Rendimiento de Métodos Off-ramp</h3>
+              <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-blue-400" />
+                How Do They Receive the Money?
+              </h3>
               <div className="space-y-4">
                 {mockData.offRampMethods.map((method, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-center justify-between p-4 bg-gray-700 rounded-lg border border-gray-600 hover:border-gray-500 transition-all duration-200">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{method.icon}</span>
                       <div>
-                        <h4 className="font-medium text-gray-900">{method.method}</h4>
-                        <p className="text-sm text-gray-600">
-                          {method.transactions.toLocaleString()} transacciones
+                        <h4 className="font-medium text-white">{method.method}</h4>
+                        <p className="text-sm text-gray-300">
+                          {method.transactions.toLocaleString()} people used this
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900">${(method.volume / 1000).toFixed(0)}K</p>
-                      <p className="text-sm text-green-600">{method.successRate}% éxito</p>
+                      <p className="font-semibold text-white">${(method.volume / 1000).toFixed(0)}K</p>
+                      <p className="text-sm text-green-400">{method.successRate}% worked well</p>
                     </div>
                   </div>
                 ))}
               </div>
             </motion.div>
+
+            {/* Additional Information */}
+            <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-400" />
+                What does this mean?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
+                <div>
+                  <h4 className="font-medium text-white mb-2">📤 Transfers in Progress</h4>
+                  <p>These are the money transfers that are arriving at their destination right now.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">⚡ System Speed</h4>
+                  <p>How many operations our system can process each second. The higher, the faster.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">💰 Current Costs</h4>
+                  <p>How much it costs to process each transfer. The lower, the better for you.</p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">🛡️ Service Status</h4>
+                  <p>How well everything is working. 100% means everything is perfect.</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
       </div>

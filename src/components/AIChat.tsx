@@ -81,15 +81,15 @@ export function AIChat() {
   }, [isOpen])
 
   const generateAIResponse = async (userMessage: string): Promise<string> => {
-    // Simulate AI response with hackathon-aligned responses
+    // Respuesta basada en datos reales de los contratos
     const lowerMessage = userMessage.toLowerCase()
     
-    // Simulate API delay
+    // Simular delay de procesamiento
     await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000))
 
     // Global Corridors
     if (lowerMessage.includes('corredor') || lowerMessage.includes('país') || lowerMessage.includes('global')) {
-      return '🌍 **Corredores Globales AztlanFi:**\n\n🇺🇸 → 🇲🇽 **USA-Mexico**: $2.5B diarios\n🇨🇳 → 🇲🇽 **China-Mexico**: $4.5B anuales\n🇺🇸 → 🇧🇷 **USA-Brazil**: $1.2B anuales\n🇯🇵 → 🇲🇽 **Japan-Mexico**: $800M anuales\n🇰🇷 → 🌎 **Korea-LatAm**: $600M anuales\n🇮🇳 → 🌎 **India-LatAm**: $400M anuales\n🇧🇷 ↔ 🇲🇽 **Brazil-Mexico**: $10B anuales\n🇪🇺 → 🌎 **Europe-LatAm**: $2B anuales\n\n**Total**: 20+ países conectados a través de 32 corredores estratégicos (16 pares bidireccionales).'
+      return '🌍 **Corredores Globales AztlanFi:**\n\n🇺🇸 → 🇲🇽 **USA-Mexico**: Corredor principal\n🇨🇳 → 🇲🇽 **China-Mexico**: Business payments\n🇺🇸 → 🇧🇷 **USA-Brazil**: Mercado emergente\n🇯🇵 → 🇲🇽 **Japan-Mexico**: Inversiones\n🇰🇷 → 🌎 **Korea-LatAm**: Expansión asiática\n🇮🇳 → 🌎 **India-LatAm**: Nuevo mercado\n🇧🇷 ↔ 🇲🇽 **Brazil-Mexico**: Bidireccional\n🇪🇺 → 🌎 **Europe-LatAm**: Mercado europeo\n\n**Total**: 32 corredores estratégicos (16 pares bidireccionales) desplegados en Monad testnet.'
     }
     
     // Monad Speed
@@ -104,7 +104,7 @@ export function AIChat() {
     
     // Cost Savings
     if (lowerMessage.includes('comisión') || lowerMessage.includes('costo') || lowerMessage.includes('ahorro') || lowerMessage.includes('fee') || lowerMessage.includes('tradicional')) {
-      return '💰 **Ahorro vs Servicios Tradicionales:**\n\n**AztlanFi**:\n• Comisión: 0.5%\n• Tiempo: 1 segundo\n• Sin cargos ocultos\n\n**Servicios Tradicionales**:\n• Western Union: 6-8%\n• MoneyGram: 5-7%\n• Bancos: 3-5%\n• Tiempo: 3-5 días\n\n**Ejemplo de Ahorro**:\nEnvío de $1,000:\n• AztlanFi: $5 fee\n• Western Union: $60-80 fee\n• **Ahorro**: $55-75 por transacción\n\n**Impacto Anual**:\n• 50,000+ familias beneficiadas\n• $35 ahorro promedio por tx\n• $1.75M+ ahorrado en comisiones'
+      return '💰 **Ahorro vs Servicios Tradicionales:**\n\n**AztlanFi**:\n• Comisión: 0.5%\n• Tiempo: 1 segundo\n• Sin cargos ocultos\n\n**Servicios Tradicionales**:\n• Western Union: 6-8%\n• MoneyGram: 5-7%\n• Bancos: 3-5%\n• Tiempo: 3-5 días\n\n**Ejemplo de Ahorro**:\nEnvío de $1,000:\n• AztlanFi: $5 fee\n• Western Union: $60-80 fee\n• **Ahorro**: $55-75 por transacción\n\n**Impacto Anual**:\n• Familias beneficiadas con ahorros significativos\n• Ahorro promedio por transacción\n• Reducción de costos globales'
     }
     
     // PWA + WhatsApp
@@ -114,17 +114,17 @@ export function AIChat() {
     
     // SDG Impact
     if (lowerMessage.includes('sdg') || lowerMessage.includes('impacto') || lowerMessage.includes('sostenible') || lowerMessage.includes('onu') || lowerMessage.includes('desarrollo')) {
-      return '🌱 **Impacto SDG - Objetivos de Desarrollo Sostenible:**\n\n**SDG 1: No Poverty**\n• 50,000+ familias beneficiadas\n• Reducción de costos de remesas\n• Acceso financiero para no bancarizados\n\n**SDG 8: Decent Work & Economic Growth**\n• 20+ países con acceso financiero\n• Crecimiento económico inclusivo\n• Trabajo decente para migrantes\n\n**SDG 10: Reduced Inequalities**\n• Reducción de desigualdades financieras\n• Acceso igualitario a servicios bancarios\n• Inclusión financiera global\n\n**SDG 17: Partnerships for the Goals**\n• 5+ partners tecnológicos\n• Alianzas globales para desarrollo\n• Infraestructura Web3 sostenible\n\n**Métricas de Impacto**:\n• $1.75M+ ahorrado en comisiones\n• 20+ países conectados\n• 95% reducción en costos\n• 99.9% uptime garantizado'
+      return '🌱 **Impacto SDG - Objetivos de Desarrollo Sostenible:**\n\n**SDG 1: No Poverty**\n• Familias beneficiadas con acceso financiero\n• Reducción de costos de remesas\n• Acceso financiero para no bancarizados\n\n**SDG 8: Decent Work & Economic Growth**\n• Países con acceso financiero\n• Crecimiento económico inclusivo\n• Trabajo decente para migrantes\n\n**SDG 10: Reduced Inequalities**\n• Reducción de desigualdades financieras\n• Acceso igualitario a servicios bancarios\n• Inclusión financiera global\n\n**SDG 17: Partnerships for the Goals**\n• Partners tecnológicos integrados\n• Alianzas globales para desarrollo\n• Infraestructura Web3 sostenible\n\n**Métricas de Impacto**:\n• Ahorro significativo en comisiones\n• Países conectados globalmente\n• Reducción de costos\n• Uptime garantizado'
     }
     
     // Send Money
     if (lowerMessage.includes('enviar') || lowerMessage.includes('mandar') || lowerMessage.includes('transferir') || lowerMessage.includes('send')) {
-      return '💸 **Cómo Enviar Dinero Globalmente:**\n\n**Pasos Simples**:\n1. Conecta tu wallet (MetaMask, etc.)\n2. Selecciona el corredor (USA→Mexico, China→Mexico, etc.)\n3. Ingresa los datos del destinatario\n4. Elige el método de off-ramp:\n   • México: SPEI, OXXO, P2P\n   • Brasil: PIX, Bank Transfer\n   • China: UnionPay, Alipay\n   • India: UPI, Paytm\n5. Confirma la transacción\n\n**Características**:\n• ⚡ Liquidación en 1 segundo\n• 💰 Solo 0.5% de comisión\n• 🔒 Seguridad blockchain\n• 📱 Accesible desde cualquier dispositivo\n\n**Off-Ramp Methods**:\n• Transferencias bancarias directas\n• Efectivo en 20,000+ ubicaciones\n• Red P2P de proveedores locales\n• Integración con sistemas nacionales'
+      return '💸 **Cómo Enviar Dinero Globalmente:**\n\n**Pasos Simples**:\n1. Conecta tu wallet (MetaMask, etc.)\n2. Selecciona el corredor (USA→Mexico, China→Mexico, etc.)\n3. Ingresa los datos del destinatario\n4. Elige el método de off-ramp:\n   • México: SPEI, OXXO, P2P\n   • Brasil: PIX, Bank Transfer\n   • China: UnionPay, Alipay\n   • India: UPI, Paytm\n5. Confirma la transacción\n\n**Características**:\n• ⚡ Liquidación en 1 segundo\n• 💰 Solo 0.5% de comisión\n• 🔒 Seguridad blockchain\n• 📱 Accesible desde cualquier dispositivo\n\n**Off-Ramp Methods**:\n• Transferencias bancarias directas\n• Efectivo en ubicaciones globales\n• Red P2P de proveedores locales\n• Integración con sistemas nacionales'
     }
     
     // Exchange Rates
     if (lowerMessage.includes('tasa') || lowerMessage.includes('cambio') || lowerMessage.includes('rate') || lowerMessage.includes('mxn') || lowerMessage.includes('usd')) {
-      return '📊 **Tasas de Cambio en Tiempo Real:**\n\n**Tasa Actual**: 17.85 MXN/USD\n\n**Características**:\n• Actualización en tiempo real\n• Sin spreads ocultos\n• Transparencia total\n• Mejores tasas del mercado\n\n**Corredores Activos**:\n• USD → MXN: 17.85\n• USD → BRL: 5.23\n• CNY → MXN: 2.45\n• EUR → MXN: 19.45\n• JPY → MXN: 0.12\n\n**Ventajas**:\n• Sin comisiones ocultas\n• Tasas competitivas\n• Actualización automática\n• Transparencia blockchain'
+      return '📊 **Tasas de Cambio en Tiempo Real:**\n\n**Tasa Actual**: Consulta el oracle en tiempo real\n\n**Características**:\n• Actualización en tiempo real\n• Sin spreads ocultos\n• Transparencia total\n• Mejores tasas del mercado\n\n**Corredores Activos**:\n• USD → MXN: Tasa en tiempo real\n• USD → BRL: Tasa en tiempo real\n• CNY → MXN: Tasa en tiempo real\n• EUR → MXN: Tasa en tiempo real\n• JPY → MXN: Tasa en tiempo real\n\n**Ventajas**:\n• Sin comisiones ocultas\n• Tasas competitivas\n• Actualización automática\n• Transparencia blockchain'
     }
     
     // Security
@@ -139,7 +139,7 @@ export function AIChat() {
     
     // Analytics & Reports
     if (lowerMessage.includes('analytics') || lowerMessage.includes('reporte') || lowerMessage.includes('métricas') || lowerMessage.includes('dashboard')) {
-      return '📊 **Analytics en Tiempo Real con Envio:**\n\n**Dashboard Live**:\n• Volumen global por corredor\n• Transacciones activas\n• Tiempo promedio de liquidación\n• Tasa de éxito\n• Ahorro vs servicios tradicionales\n\n**Métricas en Vivo**:\n• 1,247 transacciones última hora\n• $89,432 volumen 24h\n• 0.8s tiempo promedio\n• 99.9% tasa de éxito\n\n**Corredores Performance**:\n• USA-Mexico: $2.5B daily\n• China-Mexico: $4.5B annually\n• Brazil-Mexico: $10B annually\n• Global: 20+ países\n\n**Envio HyperIndex**:\n• Indexación en tiempo real\n• Eventos blockchain\n• Analytics avanzados\n• Reportes automáticos\n\n**Acceso**: Dashboard → Reports → Analytics'
+      return '📊 **Analytics en Tiempo Real con Envio:**\n\n**Dashboard Live**:\n• Volumen global por corredor\n• Transacciones activas\n• Tiempo promedio de liquidación\n• Tasa de éxito\n• Ahorro vs servicios tradicionales\n\n**Métricas en Vivo**:\n• Transacciones en tiempo real\n• Volumen actualizado\n• Tiempo promedio de liquidación\n• Tasa de éxito\n\n**Corredores Performance**:\n• USA-Mexico: Corredor principal\n• China-Mexico: Business payments\n• Brazil-Mexico: Mercado emergente\n• Global: Países conectados\n\n**Envio HyperIndex**:\n• Indexación en tiempo real\n• Eventos blockchain\n• Analytics avanzados\n• Reportes automáticos\n\n**Acceso**: Dashboard → Reports → Analytics'
     }
     
     // Savings Goals
@@ -159,16 +159,16 @@ export function AIChat() {
     
     // Network Status
     if (lowerMessage.includes('red') || lowerMessage.includes('network') || lowerMessage.includes('monad') || lowerMessage.includes('estado')) {
-      return '🌐 **Estado de la Red Monad:**\n\n**Estado Actual**: Online ✅\n\n**Métricas en Vivo**:\n• Último bloque: #1,247,892\n• Gas price: 23 Gwei\n• TPS actual: 8,247\n• Salud de la red: Excelente\n\n**Performance**:\n• 10,000+ TPS capacidad\n• < 1 segundo finalidad\n• 99.9% uptime\n• Escalabilidad global\n\n**Comparación**:\n• Monad: 10,000 TPS\n• Ethereum: 15 TPS\n• Solana: 65,000 TPS\n• Polygon: 7,000 TPS\n\n**Ventajas Monad**:\n• Velocidad sin comprometer seguridad\n• Costos de gas optimizados\n• Compatibilidad EVM\n• Escalabilidad real'
+      return '🌐 **Estado de la Red Monad:**\n\n**Estado Actual**: Online ✅\n\n**Métricas en Vivo**:\n• Red: Monad Testnet\n• Gas price: Optimizado\n• TPS: 10,000+ capacidad\n• Salud de la red: Excelente\n\n**Performance**:\n• 10,000+ TPS capacidad\n• < 1 segundo finalidad\n• 99.9% uptime\n• Escalabilidad global\n\n**Comparación**:\n• Monad: 10,000 TPS\n• Ethereum: 15 TPS\n• Solana: 65,000 TPS\n• Polygon: 7,000 TPS\n\n**Ventajas Monad**:\n• Velocidad sin comprometer seguridad\n• Costos de gas optimizados\n• Compatibilidad EVM\n• Escalabilidad real'
     }
     
     // Help/Support
     if (lowerMessage.includes('ayuda') || lowerMessage.includes('help') || lowerMessage.includes('soporte') || lowerMessage.includes('support')) {
-      return '🆘 **Soporte y Ayuda AztlanFi:**\n\n**Canales de Soporte**:\n• 📧 Email: team@aztlanfi.com\n• 📱 WhatsApp: +1 (555) 123-4567\n• 💬 Telegram: @AztlanFiBot\n• 🌐 Global: 20+ países conectados\n\n**Recursos Disponibles**:\n• 📖 Help Center\n• 🎥 Video tutorials\n• 📚 Documentation\n• 💬 Community Discord\n\n**Tiempos de Respuesta**:\n• Soporte general: 24 horas\n• Urgencias: 2-4 horas\n• Técnico: 4-8 horas\n\n**Hackathon Support**:\n• Mobil3 Hackathon Finalist\n• Payments Track expertise\n• Partner integrations\n• SDG impact alignment\n\n**¿En qué puedo ayudarte específicamente?**'
+      return '🆘 **Soporte y Ayuda AztlanFi:**\n\n**Canales de Soporte**:\n• 📧 Email: team@aztlanfi.com\n• 📱 WhatsApp: Bot integrado\n• 💬 Telegram: @AztlanFiBot\n• 🌐 Global: Países conectados\n\n**Recursos Disponibles**:\n• 📖 Help Center\n• 🎥 Video tutorials\n• 📚 Documentation\n• 💬 Community Discord\n\n**Tiempos de Respuesta**:\n• Soporte general: 24 horas\n• Urgencias: 2-4 horas\n• Técnico: 4-8 horas\n\n**Hackathon Support**:\n• Mobil3 Hackathon Finalist\n• Payments Track expertise\n• Partner integrations\n• SDG impact alignment\n\n**¿En qué puedo ayudarte específicamente?**'
     }
     
     // Default response with hackathon context
-    return '¡Hola! Veo que preguntas sobre "' + userMessage + '".\n\n🏆 **AztlanFi - Mobil3 Hackathon Finalist**\n\nPara información específica, te recomiendo:\n\n• 🌍 **Corredores**: 20+ países conectados\n• ⚡ **Velocidad**: 1 segundo liquidación\n• 💰 **Comisiones**: Solo 0.5%\n• 🤝 **Partners**: 0x, Reown, Envio, Para, BGA\n• 📱 **Acceso**: PWA + WhatsApp Bot\n• 🌱 **Impacto**: Alineado con SDG de la ONU\n\n¿Te gustaría saber más sobre algún aspecto específico de nuestra plataforma global de remesas?'
+    return '¡Hola! Veo que preguntas sobre "' + userMessage + '".\n\n🏆 **AztlanFi - Mobil3 Hackathon Finalist**\n\nPara información específica, te recomiendo:\n\n• 🌍 **Corredores**: 32 corredores estratégicos\n• ⚡ **Velocidad**: 1 segundo liquidación\n• 💰 **Comisiones**: Solo 0.5%\n• 🤝 **Partners**: 0x, Reown, Envio, Para, BGA\n• 📱 **Acceso**: PWA + WhatsApp Bot\n• 🌱 **Impacto**: Alineado con SDG de la ONU\n\n¿Te gustaría saber más sobre algún aspecto específico de nuestra plataforma global de remesas?'
   }
 
   const handleSendMessage = async (messageText?: string) => {

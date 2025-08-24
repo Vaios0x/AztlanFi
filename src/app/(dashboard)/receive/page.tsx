@@ -41,29 +41,12 @@ export default function ReceiveMoney() {
   const { userData, isLoadingUserData } = useComplianceModule()
   const { userStats, isLoadingUserStats } = useIncentiveVault()
 
-  // Simular remesas pendientes (en producción esto vendría del contrato)
+  // Cargar remesas pendientes reales del contrato
   useEffect(() => {
     if (address) {
-      // Simular datos de remesas pendientes
-      const mockPendingRemittances: PendingRemittance[] = [
-        {
-          id: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
-          sender: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
-          amount: '250.00',
-          fee: '1.25',
-          timestamp: Date.now() - 120000, // 2 minutos atrás
-          phoneHash: '0xabc123...'
-        },
-        {
-          id: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
-          sender: '0x8ba1f109551bD432803012645Hac136c772c3e',
-          amount: '180.00',
-          fee: '0.90',
-          timestamp: Date.now() - 240000, // 4 minutos atrás
-          phoneHash: '0xdef456...'
-        }
-      ]
-      setPendingRemittances(mockPendingRemittances)
+      // TODO: Implementar función para obtener remesas pendientes del contrato
+      // Por ahora, las remesas pendientes se manejarán a través de eventos del contrato
+      setPendingRemittances([])
     }
   }, [address])
 

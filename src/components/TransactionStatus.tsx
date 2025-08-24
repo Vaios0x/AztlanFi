@@ -1,316 +1,177 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Clock, 
   CheckCircle, 
-  XCircle, 
-  AlertCircle, 
+  AlertTriangle, 
+  Clock, 
+  Loader2,
   ExternalLink,
-  RefreshCw,
-  DollarSign,
-  Shield,
-  Activity
-} from 'lucide-react'
-import { useAccount } from 'wagmi'
-import { getExplorerUrl } from '@/lib/web3/contracts'
-import toast from 'react-hot-toast'
-
-interface Transaction {
-  id: string
-  type: 'send' | 'receive'
-  amount: string
-  recipient?: string
-  status: 'pending' | 'confirmed' | 'failed'
-  hash?: string
-  timestamp: Date
-  fee?: string
-  exchangeRate?: string
-}
+  Copy
+} from 'lucide-react';
 
 interface TransactionStatusProps {
-  transactions?: Transaction[]
-  onRefresh?: () => void
-  isRefreshing?: boolean
+  isVisible: boolean;
+  transactionHash?: string;
+  status: 'pending' | 'confirmed' | 'failed' | 'idle';
+  message: string;
+  onClose: () => void;
 }
 
-export function TransactionStatus({ transactions = [], onRefresh, isRefreshing = false }: TransactionStatusProps) {
-  const { address, isConnected } = useAccount()
-  const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'failed'>('all')
-  const [mounted, setMounted] = useState(false)
+export function TransactionStatus({ 
+  isVisible, 
+  transactionHash, 
+  status, 
+  message, 
+  onClose 
+}: TransactionStatusProps) {
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const copyToClipboard = async () => {
+    if (transactionHash) {
+      try {
+        await navigator.clipboard.writeText(transactionHash);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error('Error copying to clipboard:', err);
+      }
+    }
+  };
 
-  const filteredTransactions = transactions.filter(tx => 
-    filter === 'all' ? true : tx.status === filter
-  )
-
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = () => {
     switch (status) {
       case 'pending':
-        return <Clock className="w-5 h-5 text-yellow-600 animate-pulse" />
+        return <Loader2 className="w-6 h-6 text-blue-400 animate-spin" />;
       case 'confirmed':
-        return <CheckCircle className="w-5 h-5 text-green-600" />
+        return <CheckCircle className="w-6 h-6 text-green-400" />;
       case 'failed':
-        return <XCircle className="w-5 h-5 text-red-600" />
+        return <AlertTriangle className="w-6 h-6 text-red-400" />;
       default:
-        return <AlertCircle className="w-5 h-5 text-gray-600" />
+        return <Clock className="w-6 h-6 text-gray-400" />;
     }
-  }
+  };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = () => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'border-blue-500 bg-blue-500/10';
       case 'confirmed':
-        return 'bg-green-100 text-green-800'
+        return 'border-green-500 bg-green-500/10';
       case 'failed':
-        return 'bg-red-100 text-red-800'
+        return 'border-red-500 bg-red-500/10';
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'border-gray-500 bg-gray-500/10';
     }
-  }
+  };
 
-  const getStatusText = (status: string) => {
+  const getStatusText = () => {
     switch (status) {
       case 'pending':
-        return 'Pendiente'
+        return 'Transacción Pendiente';
       case 'confirmed':
-        return 'Confirmado'
+        return 'Transacción Confirmada';
       case 'failed':
-        return 'Fallido'
+        return 'Transacción Fallida';
       default:
-        return 'Desconocido'
+        return 'Esperando Transacción';
     }
-  }
+  };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    toast.success('Hash copiado al portapapeles')
-  }
-
-  if (!mounted) {
-    return (
-      <div className="card">
-        <div className="text-center py-8">
-          <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-4 animate-pulse"></div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Cargando...
-          </h3>
-        </div>
-      </div>
-    )
-  }
-
-  if (!isConnected) {
-    return (
-      <div className="card">
-        <div className="text-center py-8">
-          <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Conecta tu Wallet
-          </h3>
-          <p className="text-gray-600">
-            Necesitas conectar tu wallet para ver el estado de transacciones
-          </p>
-        </div>
-      </div>
-    )
-  }
+  const getExplorerUrl = () => {
+    if (!transactionHash) return '';
+    return `https://testnet.monadscan.com/tx/${transactionHash}`;
+  };
 
   return (
-    <div className="card">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <Activity className="w-6 h-6 text-monad-600" />
-          <h2 className="text-xl font-bold text-gray-900">
-            Estado de Transacciones
-          </h2>
-        </div>
-        <button
-          onClick={onRefresh}
-          disabled={isRefreshing}
-          className="btn-secondary flex items-center gap-2"
-          aria-label="Actualizar transacciones"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 50, scale: 0.9 }}
+          className={`fixed bottom-4 right-4 z-50 max-w-md w-full ${getStatusColor()} border rounded-lg p-4 shadow-xl`}
         >
-          <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-          Actualizar
-        </button>
-      </div>
-
-      {/* Filter Tabs */}
-      <div className="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg">
-        {[
-          { key: 'all', label: 'Todas', count: transactions.length },
-          { key: 'pending', label: 'Pendientes', count: transactions.filter(t => t.status === 'pending').length },
-          { key: 'confirmed', label: 'Confirmadas', count: transactions.filter(t => t.status === 'confirmed').length },
-          { key: 'failed', label: 'Fallidas', count: transactions.filter(t => t.status === 'failed').length },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setFilter(tab.key as any)}
-            className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-              filter === tab.key
-                ? 'bg-white text-monad-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            {tab.label}
-            <span className="ml-1 bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full text-xs">
-              {tab.count}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Transactions List */}
-      <div className="space-y-4">
-        <AnimatePresence>
-          {filteredTransactions.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-8"
-            >
-              <DollarSign className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                No hay transacciones
-              </h3>
-              <p className="text-gray-600">
-                {filter === 'all' 
-                  ? 'Aún no has realizado transacciones'
-                  : `No hay transacciones ${filter === 'pending' ? 'pendientes' : filter === 'confirmed' ? 'confirmadas' : 'fallidas'}`
-                }
+          <div className="flex items-start space-x-3">
+            {getStatusIcon()}
+            
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-white">
+                  {getStatusText()}
+                </h3>
+                <button
+                  onClick={onClose}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  ×
+                </button>
+              </div>
+              
+              <p className="text-sm text-gray-300 mb-3">
+                {message}
               </p>
-            </motion.div>
-          ) : (
-            filteredTransactions.map((transaction, index) => (
-              <motion.div
-                key={transaction.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gray-50 rounded-lg p-4 border border-gray-200"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-3 flex-1">
-                    {/* Status Icon */}
-                    <div className="mt-1">
-                      {getStatusIcon(transaction.status)}
-                    </div>
-
-                    {/* Transaction Details */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold text-gray-900">
-                          {transaction.type === 'send' ? 'Envío' : 'Recepción'}
-                        </span>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(transaction.status)}`}>
-                          {getStatusText(transaction.status)}
-                        </span>
-                      </div>
-                      
-                      <p className="text-lg font-bold text-gray-900 mb-1">
-                        ${transaction.amount}
-                      </p>
-                      
-                      {transaction.recipient && (
-                        <p className="text-sm text-gray-600 mb-1">
-                          Para: {transaction.recipient.slice(0, 6)}...{transaction.recipient.slice(-4)}
-                        </p>
-                      )}
-                      
-                      <div className="flex items-center gap-4 text-xs text-gray-500">
-                        <span>
-                          {transaction.timestamp.toLocaleString()}
-                        </span>
-                        {transaction.fee && (
-                          <span>Fee: ${transaction.fee}</span>
-                        )}
-                        {transaction.exchangeRate && (
-                          <span>Tasa: {transaction.exchangeRate}</span>
-                        )}
-                      </div>
-                    </div>
+              
+              {transactionHash && (
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-gray-400">Hash:</span>
+                    <code className="text-xs text-gray-300 font-mono bg-gray-800 px-2 py-1 rounded">
+                      {transactionHash.slice(0, 10)}...{transactionHash.slice(-8)}
+                    </code>
+                    <button
+                      onClick={copyToClipboard}
+                      className="text-gray-400 hover:text-white transition-colors"
+                      title="Copiar hash"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </button>
                   </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center gap-2 ml-4">
-                    {transaction.hash && (
-                      <>
-                        <button
-                          onClick={() => copyToClipboard(transaction.hash!)}
-                          className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                          aria-label="Copiar hash"
-                        >
-                          <RefreshCw className="w-4 h-4" />
-                        </button>
-                        <a
-                          href={`${getExplorerUrl(10143)}/tx/${transaction.hash}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                          aria-label="Ver en explorador"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </>
-                    )}
+                  
+                  {copied && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-xs text-green-400"
+                    >
+                      Hash copiado al portapapeles
+                    </motion.div>
+                  )}
+                  
+                  <div className="flex space-x-2">
+                    <a
+                      href={getExplorerUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span>Ver en explorador</span>
+                    </a>
                   </div>
                 </div>
-
-                {/* Progress Bar for Pending Transactions */}
-                {transaction.status === 'pending' && (
-                  <div className="mt-3">
-                    <div className="w-full bg-gray-200 rounded-full h-1">
-                      <motion.div
-                        className="bg-yellow-500 h-1 rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: "60%" }}
-                        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                      />
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Confirmando en la blockchain...
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-            ))
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Summary Stats */}
-      {transactions.length > 0 && (
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="text-2xl font-bold text-green-600">
-                {transactions.filter(t => t.status === 'confirmed').length}
-              </p>
-              <p className="text-sm text-gray-600">Confirmadas</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-yellow-600">
-                {transactions.filter(t => t.status === 'pending').length}
-              </p>
-              <p className="text-sm text-gray-600">Pendientes</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-red-600">
-                {transactions.filter(t => t.status === 'failed').length}
-              </p>
-              <p className="text-sm text-gray-600">Fallidas</p>
+              )}
             </div>
           </div>
-        </div>
+          
+          {status === 'pending' && (
+            <div className="mt-3">
+              <div className="w-full bg-gray-700 rounded-full h-2">
+                <motion.div
+                  className="bg-blue-400 h-2 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Confirmando transacción...
+              </p>
+            </div>
+          )}
+        </motion.div>
       )}
-    </div>
-  )
+    </AnimatePresence>
+  );
 }

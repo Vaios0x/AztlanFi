@@ -46,11 +46,11 @@ function checkContractConfig() {
   const contractsPath = path.join(__dirname, "..", "src", "lib", "web3", "contracts.ts");
   if (fs.existsSync(contractsPath)) {
     const content = fs.readFileSync(contractsPath, "utf8");
-    if (content.includes("0x138ad2d0d48070dffD6C6DaeaEbADc483CbeE29a")) {
-      console.log("✅ Configuración de contratos encontrada con direcciones de Monad");
+    if (content.includes("0x42cCb3EB32ab80433e957260cD7C486ae1BFb9f6")) {
+      console.log("✅ Configuración de contratos encontrada con direcciones de Monad testnet");
       return true;
     } else {
-      console.log("⚠️  Configuración de contratos encontrada pero sin direcciones de Monad");
+      console.log("⚠️  Configuración de contratos encontrada pero sin direcciones de Monad testnet");
       return false;
     }
   } else {

@@ -22,9 +22,14 @@ AztlanFi es el primer puente de pagos global construido específicamente para el
 ### Partner Bounties Implementados
 
 #### 🥇 0x Protocol ($4,000)
-- ✅ **Swap API**: Multi-route optimization para mejores precios
-- ✅ **Gasless API**: Transacciones sin gas para UX perfecto
+- ✅ **Swap API v2**: Multi-route optimization para mejores precios
+- ✅ **Gasless API v2**: Transacciones sin gas para UX perfecto
+- ✅ **Permit2 Support**: Seguridad mejorada y UX simplificada
+- ✅ **Monad Testnet**: Chain ID 10143 con tokens reales
+- ✅ **End-to-end Demo**: Flujo completo desde quote hasta confirmación
+- ✅ **Mobile-First**: Optimizado para dispositivos móviles
 - ✅ **Integración completa** en `src/lib/integrations/0xProtocol.ts`
+- ✅ **Componente Demo** en `src/components/0xProtocolDemo.tsx`
 
 #### 🥈 Reown AppKit ($3,000)
 - ✅ **Social Login**: Google, Apple, Discord, Farcaster, Telegram

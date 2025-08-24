@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAccount, useDisconnect, useSwitchChain } from 'wagmi'
 import { motion } from 'framer-motion'
-import { Wallet, LogOut } from 'lucide-react'
+import { Wallet, LogOut, ChevronRight } from 'lucide-react'
 import { monadTestnet } from '@/lib/web3/chains'
 
 export function ReownWalletConnect() {
@@ -56,14 +56,16 @@ export function ReownWalletConnect() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
+        className="w-full"
       >
         <button
           disabled
-          className="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn-primary-compact w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Cargando conexión de wallet"
         >
-          <Wallet size={16} />
-          Cargando...
+          <Wallet size={14} />
+          <span className="hidden sm:inline">Cargando...</span>
+          <span className="sm:hidden">...</span>
         </button>
       </motion.div>
     )
@@ -74,36 +76,47 @@ export function ReownWalletConnect() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
+      className="w-full"
     >
       {!isConnected ? (
-        <div className="space-y-2">
-          {/* Usar el web component de Reown AppKit */}
-          <appkit-button 
-            className="btn-primary flex items-center gap-2"
-            aria-label="Conectar wallet con Reown AppKit"
-          />
+        <div className="space-y-2 w-full">
+          {/* Usar el web component de Reown AppKit con estilos responsive */}
+          <div className="w-full reown-mobile-optimized">
+            <appkit-button />
+          </div>
+          {/* Fallback button for accessibility */}
+          <noscript>
+            <button
+              className="btn-primary-compact w-full sm:w-auto flex items-center justify-center gap-2"
+              aria-label="Conectar wallet con Reown AppKit"
+              disabled
+            >
+              <Wallet size={14} />
+              <span className="hidden sm:inline">Conectar Wallet</span>
+              <span className="sm:hidden">Conectar</span>
+            </button>
+          </noscript>
         </div>
       ) : (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full">
           {chainId !== monadTestnet.id && (
             <button
               onClick={handleSwitchToMonad}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors text-sm"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-3 sm:py-1.5 sm:px-2 rounded-lg transition-colors text-xs w-full sm:w-auto text-center"
               aria-label="Cambiar a red Monad Testnet"
             >
-              Cambiar a Monad
+              <span className="hidden sm:inline">Monad</span>
+              <span className="sm:hidden">Cambiar a Monad</span>
             </button>
           )}
-          <div className="bg-gray-100 text-gray-700 font-medium py-2 px-3 rounded-lg">
-            {chainId === monadTestnet.id ? 'Monad Testnet' : 'Red Incorrecta'}
-          </div>
           <button
             onClick={() => disconnect()}
-            className="bg-monad-600 hover:bg-monad-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-monad-600 hover:bg-monad-700 text-white font-medium py-2 px-3 sm:py-1.5 sm:px-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 text-xs w-full sm:w-auto"
             aria-label="Desconectar wallet"
           >
-            <LogOut size={16} />
-            {address?.slice(0, 6)}...{address?.slice(-4)}
+            <span className="hidden sm:inline">{address?.slice(0, 4)}...{address?.slice(-4)}</span>
+            <span className="sm:hidden">Desconectar</span>
+            <ChevronRight size={12} className="hidden sm:inline" />
           </button>
         </div>
       )}

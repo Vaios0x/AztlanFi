@@ -18,7 +18,15 @@ import {
   Award,
   Heart,
   X,
-  ExternalLink
+  ExternalLink,
+  Send,
+  Phone,
+  Calculator,
+  Gift,
+  Banknote,
+  CreditCard,
+  Wifi,
+  MessageCircle
 } from 'lucide-react'
 
 export function Features() {
@@ -28,126 +36,126 @@ export function Features() {
     {
       id: 'speed',
       icon: Zap,
-      title: "Ultra Fast Speed",
-      description: "Instant transfers with 1-second finality thanks to Monad blockchain technology",
+      title: "Faster Than a Message",
+      description: "Your money arrives in less than 1 minute, like sending a WhatsApp",
       color: "from-blue-500 to-purple-600",
       bgColor: "bg-blue-50",
       borderColor: "border-blue-200",
       details: {
-        title: "Ultra Fast Speed - Powered by Monad",
-        description: "Experience lightning-fast remittances with 1-second finality, powered by Monad's revolutionary parallel execution engine.",
+        title: "Instant Speed",
+        description: "Imagine your money traveling at the speed of light. That's what AztlanFi does.",
         benefits: [
-          "10,000+ transactions per second",
-          "1-second finality guarantee",
-          "Parallel transaction processing",
-          "Real-time settlement confirmation"
+          "Money arrives in less than 1 minute",
+          "No more waiting days",
+          "Immediate confirmation",
+          "Like sending a text message"
         ],
-        technical: "Monad's parallel execution engine processes multiple transactions simultaneously, eliminating the bottlenecks of traditional sequential blockchain processing.",
-        link: "https://monad.xyz"
+        technical: "We use advanced technology that processes your transfer instantly, without waiting or delays.",
+        link: "/demo"
       }
     },
     {
       id: 'fees',
       icon: DollarSign,
       title: "Minimal Fees",
-      description: "Only 0.5% commission vs 7-8% from traditional services. Save up to 95% on fees",
+      description: "Only $2-$5 per transfer vs $25-$50 from the bank. You save up to 90%",
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50",
       borderColor: "border-green-200",
       details: {
-        title: "Minimal Fees - Maximum Savings",
-        description: "Save up to 95% compared to traditional remittance services with our transparent, low-fee structure.",
+        title: "Save Real Money",
+        description: "Low fees mean more money for your family.",
         benefits: [
-          "Only 0.5% commission",
+          "Only $2-$5 per transfer",
           "No hidden charges",
           "Transparent pricing",
-          "Volume discounts available"
+          "Save up to $45 per transfer"
         ],
-        technical: "Our smart contract-based system eliminates intermediaries, reducing operational costs and passing savings directly to users.",
-        link: "https://aztlanfi.com/pricing"
+        technical: "We eliminate expensive intermediaries and pass the savings directly to you.",
+        link: "/pricing"
       }
     },
     {
       id: 'security',
       icon: Shield,
-      title: "Blockchain Security",
-      description: "Immutable and transparent transactions with advanced cryptographic verification",
+      title: "Safe as a Bank",
+      description: "The same protection as your bank account, but improved",
       color: "from-purple-500 to-indigo-600",
       bgColor: "bg-purple-50",
       borderColor: "border-purple-200",
       details: {
-        title: "Blockchain Security - Military Grade",
-        description: "Your funds are protected by the most advanced cryptographic security measures available.",
+        title: "Bank-Level Security",
+        description: "Your money is protected with the best security technology.",
         benefits: [
-          "Immutable transaction records",
-          "Advanced cryptographic verification",
-          "Multi-signature wallet support",
-          "Real-time fraud detection"
+          "Identity verification",
+          "Bank-level encryption",
+          "Fraud protection",
+          "Refund guarantee"
         ],
-        technical: "All transactions are cryptographically signed and verified on the blockchain, ensuring complete transparency and security.",
-        link: "https://aztlanfi.com/security"
+        technical: "We use the same technology that protects the world's largest banks.",
+        link: "/security"
       }
     },
     {
       id: 'mobile',
       icon: Smartphone,
-      title: "Mobile PWA App",
-      description: "Progressive web application that works offline and installs as a native app",
+      title: "Easy-to-Use App",
+      description: "Works on your phone like WhatsApp. No need to download anything",
       color: "from-orange-500 to-red-600",
       bgColor: "bg-orange-50",
       borderColor: "border-orange-200",
       details: {
-        title: "Mobile PWA App - Native Experience",
-        description: "Access AztlanFi anywhere with our progressive web app that works like a native mobile application.",
+        title: "Intuitive Web App",
+        description: "Designed so anyone can use it easily.",
         benefits: [
-          "Works offline",
-          "Install as native app",
-          "Push notifications",
-          "Biometric authentication"
+          "Works on any phone",
+          "No need to download anything",
+          "Simple and clear interface",
+          "Like using WhatsApp"
         ],
-        technical: "Built with modern PWA standards, the app provides a seamless mobile experience with offline capabilities and native app features.",
-        link: "https://app.aztlanfi.com"
+        technical: "Our web app works on any device with internet.",
+        link: "/dashboard"
       }
     },
     {
       id: 'global',
       icon: Globe,
-      title: "Global Coverage",
-      description: "Send to Mexico from anywhere in the world with multi-currency support",
+      title: "Send to Many Countries",
+      description: "Mexico, Guatemala, El Salvador and more. We'll add more countries soon",
       color: "from-teal-500 to-cyan-600",
       bgColor: "bg-teal-50",
       borderColor: "border-teal-200",
       details: {
-        title: "Global Coverage - Worldwide Access",
-        description: "Send money to Mexico from anywhere in the world with our global network and multi-currency support.",
+        title: "Global Coverage",
+        description: "We connect families in different countries around the world.",
         benefits: [
-          "Worldwide coverage",
-          "Multi-currency support",
-          "Real-time exchange rates",
+          "15+ countries available",
+          "More countries coming soon",
+          "Fair exchange rates",
           "Local payment methods"
         ],
-        technical: "Our global network connects with local payment systems and banking infrastructure to ensure reliable delivery worldwide.",
-        link: "https://aztlanfi.com/coverage"
+        technical: "We work with banks and local services in each country to ensure delivery.",
+        link: "/coverage"
       }
     },
     {
       id: 'support',
-      icon: Users,
-      title: "24/7 Support",
-      description: "Customer service in English with live chat and integrated WhatsApp",
+      icon: MessageCircle,
+      title: "24/7 Support via WhatsApp",
+      description: "We help you when you need it, in Spanish and via WhatsApp",
       color: "from-pink-500 to-rose-600",
       bgColor: "bg-pink-50",
       borderColor: "border-pink-200",
       details: {
-        title: "24/7 Support - Always Here for You",
-        description: "Get help anytime, anywhere with our comprehensive customer support system available 24/7.",
+        title: "Personalized Support",
+        description: "We're here to help you when you need it.",
         benefits: [
-          "24/7 live chat",
-          "WhatsApp integration",
-          "English and Spanish support",
-          "Average response time < 2 minutes"
+          "24/7 attention",
+          "Via WhatsApp",
+          "In Spanish",
+          "Response in minutes"
         ],
-        technical: "Our AI-powered support system combined with human experts ensures you get the help you need instantly.",
+        technical: "Our team is available all day to resolve your questions.",
         link: "https://wa.me/+14155238886"
       }
     }
@@ -157,22 +165,22 @@ export function Features() {
     {
       icon: CheckCircle,
       title: "No Hidden Limits",
-      description: "Transparent pricing with no surprise charges"
+      description: "We tell you exactly how much you'll pay"
     },
     {
       icon: Award,
-      title: "Best Exchange Rate",
-      description: "Real-time updated market rates"
+      title: "Better Exchange Rate",
+      description: "Fair and updated rates"
     },
     {
       icon: Heart,
-      title: "Social Impact",
+      title: "We Help Families",
       description: "We reduce costs for migrant families"
     },
     {
       icon: TrendingUp,
-      title: "Constant Growth",
-      description: "Platform that continuously improves"
+      title: "Always Improving",
+      description: "We add new countries and features"
     }
   ]
 
@@ -182,7 +190,7 @@ export function Features() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-gray-800 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
+        className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-200"
       >
         <div className="flex justify-between items-start mb-6">
           <div className="flex items-center gap-4">
@@ -190,14 +198,14 @@ export function Features() {
               <feature.icon className="text-white" size={32} />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-white">{feature.details.title}</h3>
-              <p className="text-gray-300">{feature.details.description}</p>
+              <h3 className="text-2xl font-bold text-gray-800">{feature.details.title}</h3>
+              <p className="text-gray-600">{feature.details.description}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-200 transition-colors"
-            aria-label="Close modal"
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close window"
           >
             <X size={24} />
           </button>
@@ -205,26 +213,26 @@ export function Features() {
 
         <div className="space-y-6">
           <div>
-            <h4 className="text-lg font-semibold text-white mb-3">Key Benefits</h4>
+            <h4 className="text-lg font-semibold text-gray-800 mb-3">What Does This Mean?</h4>
             <ul className="space-y-2">
               {feature.details.benefits.map((benefit: string, index: number) => (
                 <li key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-gray-300">{benefit}</span>
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-gray-700">{benefit}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-white mb-3">Technical Details</h4>
-            <p className="text-gray-300 leading-relaxed">{feature.details.technical}</p>
+            <h4 className="text-lg font-semibold text-gray-800 mb-3">In Simple Terms</h4>
+            <p className="text-gray-700 leading-relaxed">{feature.details.technical}</p>
           </div>
 
           <div className="flex gap-3">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 transition-colors"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Close
             </button>
@@ -232,7 +240,7 @@ export function Features() {
               href={feature.details.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 px-4 py-3 bg-gradient-to-r from-monad-600 to-purple-700 text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               Learn More
               <ExternalLink size={16} />
@@ -255,11 +263,11 @@ export function Features() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Main Features
+            Why Choose AztlanFi?
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Discover why AztlanFi is the most advanced, fastest and most economical 
-            remittance platform on the market
+            We explain in simple terms why we're the best option 
+            for sending money to your family
           </p>
         </motion.div>
 
@@ -314,10 +322,10 @@ export function Features() {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Why choose AztlanFi?
+              What Else Do We Offer?
             </h3>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              More than a remittance platform, we are your financial partner for the future
+              Additional features that make AztlanFi your best option
             </p>
           </div>
 
@@ -359,23 +367,23 @@ export function Features() {
           className="mt-20 grid md:grid-cols-4 gap-8 text-center"
         >
           <div className="space-y-2">
-            <div className="text-4xl font-bold text-monad-600">10,000+</div>
-            <div className="text-gray-600">Transactions per second</div>
+            <div className="text-4xl font-bold text-monad-400">1 minute</div>
+            <div className="text-gray-400">Arrival time</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-4xl font-bold text-monad-600">95%</div>
-            <div className="text-gray-600">Less in fees</div>
+            <div className="text-4xl font-bold text-monad-400">90%</div>
+            <div className="text-gray-400">Less in fees</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-4xl font-bold text-monad-600">1s</div>
-            <div className="text-gray-600">Finality time</div>
+            <div className="text-4xl font-bold text-monad-400">15+</div>
+            <div className="text-gray-400">Available countries</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-4xl font-bold text-monad-600">24/7</div>
-            <div className="text-gray-600">Support available</div>
+            <div className="text-4xl font-bold text-monad-400">24/7</div>
+            <div className="text-gray-400">Support available</div>
           </div>
         </motion.div>
       </div>

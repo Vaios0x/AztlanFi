@@ -12,20 +12,16 @@ export function useKYC() {
     if (userData) {
       const userDataTyped = userData as any
       const level = userDataTyped?.kycLevel || 0
-      // Para el demo del hackathon, simular nivel Pro (2) si no está verificado
-      const demoLevel = level >= 1 ? level : 2
-      setKycLevel(demoLevel)
-      setIsVerified(demoLevel >= 1)
+      setKycLevel(level)
+      setIsVerified(level >= 1)
     } else {
-      // Si no hay datos del usuario, simular nivel Pro para el demo
-      setKycLevel(2)
-      setIsVerified(true)
+      setKycLevel(0)
+      setIsVerified(false)
     }
   }, [userData])
 
   const requiresKYC = () => {
-    // Para el demo del hackathon, no se requiere KYC
-    return false
+    return kycLevel < 1
   }
 
   const getKYCStatus = () => {

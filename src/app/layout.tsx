@@ -6,6 +6,7 @@ import { headers } from 'next/headers'
 import ReownProvider from '@/components/ReownProvider'
 import { KYCProvider } from '@/components/KYCProvider'
 import { AIChat } from '@/components/AIChat'
+import { PWARegistration } from '@/components/PWARegistration'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,12 +27,13 @@ export default async function RootLayout({
   const cookies = headersObj.get('cookie')
 
   return (
-    <html lang="es">
+    <html lang="en">
       <body className={inter.className}>
         <ReownProvider cookies={cookies}>
           <KYCProvider>
             {children}
             <AIChat />
+            <PWARegistration />
             <Toaster 
               position="top-center"
               toastOptions={{

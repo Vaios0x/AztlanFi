@@ -70,11 +70,15 @@ export interface ContractAddresses {
 }
 `;
 
-// Write updated contracts.ts file
+// Write the updated contracts.ts file
 fs.writeFileSync('src/lib/web3/contracts.ts', contractsTsContent);
 
-console.log('✅ Updated src/lib/web3/contracts.ts with new contract addresses');
-console.log('📋 Contract addresses updated:');
-Object.entries(deploymentInfo.contracts).forEach(([name, address]) => {
-  console.log(`  ${name}: ${address}`);
-});
+console.log('✅ Contract addresses updated successfully!');
+console.log('📋 Updated addresses:');
+console.log('AztlanFiCore:', deploymentInfo.contracts.AztlanFiCore);
+console.log('PartnerIntegrations:', deploymentInfo.contracts.PartnerIntegrations);
+console.log('RemittancePool:', deploymentInfo.contracts.RemittancePool);
+console.log('ComplianceModule:', deploymentInfo.contracts.ComplianceModule);
+console.log('IncentiveVault:', deploymentInfo.contracts.IncentiveVault);
+console.log('RemittanceToken:', deploymentInfo.contracts.RemittanceToken);
+console.log('ExchangeRateOracle:', deploymentInfo.contracts.ExchangeRateOracle);

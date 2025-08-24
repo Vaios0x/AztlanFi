@@ -109,41 +109,31 @@ export function WhatsAppBot() {
   const handleQuickReply = async (action: string) => {
     switch (action) {
       case 'send_money':
-        await simulateTyping(() => {
-          addBotMessage('Perfecto, vamos a enviar dinero. Primero, elige el corredor de pago:', 'text');
-          showCorridorSelection();
-        });
+        addBotMessage('Perfecto, vamos a enviar dinero. Primero, elige el corredor de pago:', 'text');
+        showCorridorSelection();
         break;
         
       case 'view_corridors':
-        await simulateTyping(() => {
-          addBotMessage('Aquí tienes todos nuestros corredores disponibles:', 'text');
-          showCorridorsList();
-        });
+        addBotMessage('Aquí tienes todos nuestros corredores disponibles:', 'text');
+        showCorridorsList();
         break;
         
       case 'check_prices':
-        await simulateTyping(() => {
-          addBotMessage('Nuestras comisiones son las más bajas del mercado:', 'text');
-          addBotMessage('• Comisión estándar: 0.5%\n• Sin comisiones ocultas\n• Liquidación en menos de 1 segundo\n• Soporte 24/7', 'text');
-        });
+        addBotMessage('Nuestras comisiones son las más bajas del mercado:', 'text');
+        addBotMessage('• Comisión estándar: 0.5%\n• Sin comisiones ocultas\n• Liquidación en menos de 1 segundo\n• Soporte 24/7', 'text');
         break;
         
       case 'support':
-        await simulateTyping(() => {
-          addBotMessage('¿En qué puedo ayudarte?', 'text');
-          addQuickReplies([
-            { id: '1', text: 'Problema Técnico', action: 'tech_support' },
-            { id: '2', text: 'Verificación KYC', action: 'kyc_support' },
-            { id: '3', text: 'Contactar Humano', action: 'human_support' }
-          ]);
-        });
+        addBotMessage('¿En qué puedo ayudarte?', 'text');
+        addQuickReplies([
+          { id: '1', text: 'Problema Técnico', action: 'tech_support' },
+          { id: '2', text: 'Verificación KYC', action: 'kyc_support' },
+          { id: '3', text: 'Contactar Humano', action: 'human_support' }
+        ]);
         break;
         
       default:
-        await simulateTyping(() => {
-          addBotMessage('No entiendo esa opción. ¿Puedes intentar de nuevo?', 'text');
-        });
+        addBotMessage('No entiendo esa opción. ¿Puedes intentar de nuevo?', 'text');
     }
   };
   
@@ -179,11 +169,9 @@ export function WhatsAppBot() {
     
     setSelectedCorridor(corridorId);
     
-    await simulateTyping(() => {
-      addBotMessage(`Excelente elección: ${corridor.name}`, 'text');
-      addBotMessage(`Ahora ingresa el monto que quieres enviar (en USD):`, 'text');
-      addBotMessage('💡 **Ejemplos:**\n• $100\n• $500\n• $1000', 'text');
-    });
+    addBotMessage(`Excelente elección: ${corridor.name}`, 'text');
+    addBotMessage(`Ahora ingresa el monto que quieres enviar (en USD):`, 'text');
+    addBotMessage('💡 **Ejemplos:**\n• $100\n• $500\n• $1000', 'text');
     
     setCurrentStep('amount');
   };
@@ -191,9 +179,7 @@ export function WhatsAppBot() {
   const handleAmountInput = async (amount: string) => {
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount) || numAmount <= 0) {
-      await simulateTyping(() => {
-        addBotMessage('Por favor ingresa un monto válido mayor a $0', 'text');
-      });
+      addBotMessage('Por favor ingresa un monto válido mayor a $0', 'text');
       return;
     }
     
@@ -202,15 +188,13 @@ export function WhatsAppBot() {
     const fee = corridor ? (numAmount * corridor.fee) / 100 : (numAmount * 0.5) / 100;
     const total = numAmount + fee;
     
-    await simulateTyping(() => {
-      addBotMessage(`📊 **Resumen de la Transacción:**`, 'text');
-      addBotMessage(`💰 Monto: $${numAmount.toFixed(2)} USD\n💸 Comisión: $${fee.toFixed(2)} (${corridor?.fee || 0.5}%)\n💵 Total: $${total.toFixed(2)} USD`, 'text');
-      addBotMessage(`¿Quieres continuar con esta transacción?`, 'text');
-      addQuickReplies([
-        { id: '1', text: '✅ Confirmar', action: 'confirm_transaction' },
-        { id: '2', text: '❌ Cancelar', action: 'cancel_transaction' }
-      ]);
-    });
+    addBotMessage(`📊 **Resumen de la Transacción:**`, 'text');
+    addBotMessage(`💰 Monto: $${numAmount.toFixed(2)} USD\n💸 Comisión: $${fee.toFixed(2)} (${corridor?.fee || 0.5}%)\n💵 Total: $${total.toFixed(2)} USD`, 'text');
+    addBotMessage(`¿Quieres continuar con esta transacción?`, 'text');
+    addQuickReplies([
+      { id: '1', text: '✅ Confirmar', action: 'confirm_transaction' },
+      { id: '2', text: '❌ Cancelar', action: 'cancel_transaction' }
+    ]);
     
     setCurrentStep('confirmation');
   };
@@ -234,14 +218,12 @@ export function WhatsAppBot() {
     } else if (text.toLowerCase().includes('ayuda') || text.toLowerCase().includes('soporte')) {
       await handleQuickReply('support');
     } else {
-      await simulateTyping(() => {
-        addBotMessage('No entiendo tu mensaje. ¿Puedes ser más específico?', 'text');
-        addQuickReplies([
-          { id: '1', text: 'Enviar Dinero', action: 'send_money' },
-          { id: '2', text: 'Ver Corredores', action: 'view_corridors' },
-          { id: '3', text: 'Ayuda', action: 'support' }
-        ]);
-      });
+      addBotMessage('No entiendo tu mensaje. ¿Puedes ser más específico?', 'text');
+      addQuickReplies([
+        { id: '1', text: 'Enviar Dinero', action: 'send_money' },
+        { id: '2', text: 'Ver Corredores', action: 'view_corridors' },
+        { id: '3', text: 'Ayuda', action: 'support' }
+      ]);
     }
   };
   

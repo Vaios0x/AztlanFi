@@ -230,7 +230,7 @@ export function ContractTester() {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <a
-            href={`${getExplorerUrl(10143)}/address/0x138ad2d0d48070dffD6C6DaeaEbADc483CbeE29a`}
+            href={`${getExplorerUrl(10143)}/address/0x42cCb3EB32ab80433e957260cD7C486ae1BFb9f6`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-blue-600 hover:text-blue-800"
@@ -239,7 +239,7 @@ export function ContractTester() {
             RemittancePool
           </a>
           <a
-            href={`${getExplorerUrl(10143)}/address/0x2e2e47ab692b8A29c16a38bca3A8523fA520853b`}
+            href={`${getExplorerUrl(10143)}/address/0xB72EcDa4f600F5a5965C82eB421a551EdC8279D2`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-blue-600 hover:text-blue-800"
@@ -248,7 +248,7 @@ export function ContractTester() {
             RemittanceToken
           </a>
           <a
-            href={`${getExplorerUrl(10143)}/address/0xFFdCc99Cc7A9DE930716e3fB4a1b153caa740AfC`}
+            href={`${getExplorerUrl(10143)}/address/0x57439Fa61Ac189DD5fBFaA87113A70C70385cF64`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-blue-600 hover:text-blue-800"
@@ -257,13 +257,31 @@ export function ContractTester() {
             ExchangeRateOracle
           </a>
           <a
-            href={`${getExplorerUrl(10143)}/address/0x025434d9Cd4c77F7acC24f8DF90F07b425eFA953`}
+            href={`${getExplorerUrl(10143)}/address/0x1546F9800d28ddff94438A76C8445381E487E1a8`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-blue-600 hover:text-blue-800"
           >
             <ExternalLink className="w-4 h-4 mr-2" />
             ComplianceModule
+          </a>
+          <a
+            href={`${getExplorerUrl(10143)}/address/0x46Ca523e51783a378fBa0D06d05929652D04B19E`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-blue-600 hover:text-blue-800"
+          >
+            <ExternalLink className="w-4 h-4 mr-2" />
+            AztlanFiCore
+          </a>
+          <a
+            href={`${getExplorerUrl(10143)}/address/0xC1eeEDbc9bcB94484157BbC2F8B95D94B1d7e447`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-blue-600 hover:text-blue-800"
+          >
+            <ExternalLink className="w-4 h-4 mr-2" />
+            PartnerIntegrations
           </a>
         </div>
       </motion.div>

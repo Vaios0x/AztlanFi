@@ -2,13 +2,13 @@
 export const CONTRACT_ADDRESSES = {
   // Monad Testnet (Chain ID: 10143)
   monadTestnet: {
-    RemittancePool: "0x138ad2d0d48070dffD6C6DaeaEbADc483CbeE29a",
-    ComplianceModule: "0x025434d9Cd4c77F7acC24f8DF90F07b425eFA953",
-    IncentiveVault: "0x6fF6aD8216dD1454bC977Ebb72C83aD96C034E28",
-    RemittanceToken: "0x2e2e47ab692b8A29c16a38bca3A8523fA520853b",
-    ExchangeRateOracle: "0xFFdCc99Cc7A9DE930716e3fB4a1b153caa740AfC",
-    AztlanFiCore: "0x0000000000000000000000000000000000000000", // To be deployed
-    PartnerIntegrations: "0x0000000000000000000000000000000000000000", // To be deployed
+    RemittancePool: "0x42cCb3EB32ab80433e957260cD7C486ae1BFb9f6",
+    ComplianceModule: "0x1546F9800d28ddff94438A76C8445381E487E1a8",
+    IncentiveVault: "0xdFa24C062fb6fFDBF8fe7431aD8EB2014E841ef2",
+    RemittanceToken: "0xB72EcDa4f600F5a5965C82eB421a551EdC8279D2",
+    ExchangeRateOracle: "0x57439Fa61Ac189DD5fBFaA87113A70C70385cF64",
+    AztlanFiCore: "0x46Ca523e51783a378fBa0D06d05929652D04B19E",
+    PartnerIntegrations: "0xC1eeEDbc9bcB94484157BbC2F8B95D94B1d7e447",
   },
   // Hardhat Local (Chain ID: 1337) - para desarrollo local
   hardhat: {

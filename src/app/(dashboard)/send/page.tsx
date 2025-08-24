@@ -21,13 +21,13 @@ import { RecipientForm } from '@/components/RecipientForm';
 import { OffRampSelector } from '@/components/OffRampSelector';
 import { TransactionPreview } from '@/components/TransactionPreview';
 import { useKYC } from '@/hooks/useKYC';
-import { corridors } from '@/lib/constants/corridors';
+import { corridors, PaymentCorridor } from '@/lib/constants/corridors';
 import { use0xProtocol } from '@/lib/integrations/0xProtocol';
 import { useParaWallet } from '@/lib/integrations/paraIntegration';
 
 export default function SendMoneyPage() {
   const [step, setStep] = useState(1);
-  const [selectedCorridor, setSelectedCorridor] = useState<string>('');
+  const [selectedCorridor, setSelectedCorridor] = useState<PaymentCorridor | null>(null);
   const [amount, setAmount] = useState<string>('');
   const [recipient, setRecipient] = useState({
     name: '',
@@ -44,7 +44,7 @@ export default function SendMoneyPage() {
   const { getSwapQuote, executeGaslessSwap } = use0xProtocol();
   const { createAppClipPayment } = useParaWallet();
   
-  const currentCorridor = corridors.find(c => c.id === selectedCorridor);
+  const currentCorridor = selectedCorridor;
   const currentOffRamp = currentCorridor?.offRampMethods.find(m => m.id === selectedOffRamp);
   
   const totalSteps = 4;
@@ -74,17 +74,16 @@ export default function SendMoneyPage() {
       const quote = await getSwapQuote({
         sellToken: 'USDC',
         buyToken: currentCorridor?.toCountry === 'Mexico' ? 'MXN' : 'USD',
-        sellAmount: parseFloat(amount),
-        takerAddress: '0x...', // User wallet address
-        skipValidation: false,
-        intentOnFilling: true
+        sellAmount: parseFloat(amount).toString(),
+        takerAddress: '0x...' // User wallet address
       });
       
       // Execute gasless swap
       const swapResult = await executeGaslessSwap({
         trade: quote,
         signature: '0x...', // User signature
-        userAddress: '0x...' // User address
+        chainId: 10143, // Monad testnet
+        taker: '0x...' // User wallet address
       });
       
       // Create App Clip payment if using Para
@@ -92,8 +91,8 @@ export default function SendMoneyPage() {
         await createAppClipPayment({
           amount: parseFloat(amount),
           recipient: recipient.name,
-          token: 'USDC',
-          qrCodeData: `aztlanfi://payment/${Date.now()}`
+          currency: 'USDC',
+          metadata: { qrCodeData: `aztlanfi://payment/${Date.now()}` }
         });
       }
       
@@ -111,7 +110,7 @@ export default function SendMoneyPage() {
   const canProceed = () => {
     switch (step) {
       case 1:
-        return selectedCorridor !== '';
+        return selectedCorridor !== null;
       case 2:
         return amount !== '' && parseFloat(amount) > 0;
       case 3:
@@ -174,7 +173,6 @@ export default function SendMoneyPage() {
               <CorridorSelector
                 selectedCorridor={selectedCorridor}
                 onSelectCorridor={setSelectedCorridor}
-                corridors={corridors.filter(c => c.active)}
               />
             </motion.div>
           )}
@@ -198,7 +196,7 @@ export default function SendMoneyPage() {
               <AmountInput
                 amount={amount}
                 setAmount={setAmount}
-                corridor={currentCorridor}
+                corridor={currentCorridor || undefined}
               />
             </motion.div>
           )}
@@ -222,7 +220,7 @@ export default function SendMoneyPage() {
               <RecipientForm
                 recipient={recipient}
                 setRecipient={setRecipient}
-                corridor={currentCorridor}
+                corridor={currentCorridor || undefined}
               />
             </motion.div>
           )}
@@ -268,7 +266,7 @@ export default function SendMoneyPage() {
               </div>
               
               <TransactionPreview
-                corridor={currentCorridor}
+                corridor={currentCorridor || undefined}
                 amount={amount}
                 recipient={recipient}
                 offRamp={currentOffRamp}
